@@ -12,7 +12,6 @@ function RegistrationForm() {
     const [hashtag, setHashtag] = useState('');
 
     // Handle form submission
-    // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
 

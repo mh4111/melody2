@@ -38,4 +38,5 @@ public class UserAccountService {
     public void deleteUserAccount(Long id) {
         userAccountRepository.deleteById(id);
     }
+
 }
