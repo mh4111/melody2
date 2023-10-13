@@ -24,4 +24,6 @@ public class SoloArtist {
 
     @Column(name = "Singer_Hashtags", length = 200)
     private String singerHashtags;
+
+
 }

@@ -61,4 +61,5 @@ public class Song {
     @ManyToOne
     @JoinColumn(name = "Genre_ID", referencedColumnName = "Genre_ID", insertable = false, updatable = false)
     private Genre genre;
+
 }

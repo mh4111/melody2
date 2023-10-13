@@ -10,10 +10,11 @@ const Home = () => {
             <ClientComponent />
             <h1> <Link href="/login"> test </Link></h1>
             <h1> <Link href="/album"> album </Link></h1>
-            <h1> <Link href="/solo"> solo </Link></h1>
-            <h1> <Link href="/group"> group </Link></h1>
             <h1> <Link href="/song"> song </Link></h1>
             <h1> <Link href="/songTest"> songTest </Link></h1>
+            <h1> <Link href="/albumTest"> albumTest </Link></h1>
+            <h1> <Link href="/artist"> artists </Link></h1>
+            {/*<h1> <Link href="/group"> group </Link></h1>*/}
         </div>
     );
 };

@@ -1,8 +1,8 @@
 package com.acorn.melody2.entity;
 
 import jakarta.persistence.*;
-
 import lombok.Data;
+
 
 @Entity
 @Table(name = "Album")
@@ -55,6 +55,7 @@ public class Album {
     @JoinColumn(name = "Group_Artist_ID", referencedColumnName = "GroupArtist_ID", insertable = false, updatable = false)
     private GroupArtist groupArtist;
 
+    //table과 연동 되지 않는 변수
     @Transient
     private String ArtistName = "";
 
