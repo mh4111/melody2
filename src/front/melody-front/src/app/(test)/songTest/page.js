@@ -84,29 +84,29 @@ class SongManager extends Component {
                 <h2 className="text-3xl font-semibold mb-4">Song Manager</h2>
 
                 {/* Add Song Form */}
-                <div className="mb-4">
-                    <h3 className="text-xl font-semibold mb-2">Add Song</h3>
-                    <input
-                        type="text"
-                        name="title"
-                        placeholder="Title"
-                        value={newSong.title}
-                        onChange={this.handleInputChange}
-                        className="border rounded-md p-2 w-full mb-2"
-                    />
-                    <input
-                        type="text"
-                        name="songInfo"
-                        placeholder="Song Info"
-                        value={newSong.songInfo}
-                        onChange={this.handleInputChange}
-                        className="border rounded-md p-2 w-full mb-2"
-                    />
-                    {/* Add other song fields here */}
-                    <button onClick={this.handleAddSong} className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
-                        Add
-                    </button>
-                </div>
+                {/*<div className="mb-4">*/}
+                {/*    <h3 className="text-xl font-semibold mb-2">Add Song</h3>*/}
+                {/*    <input*/}
+                {/*        type="text"*/}
+                {/*        name="title"*/}
+                {/*        placeholder="Title"*/}
+                {/*        value={newSong.title}*/}
+                {/*        onChange={this.handleInputChange}*/}
+                {/*        className="border rounded-md p-2 w-full mb-2"*/}
+                {/*    />*/}
+                {/*    <input*/}
+                {/*        type="text"*/}
+                {/*        name="songInfo"*/}
+                {/*        placeholder="Song Info"*/}
+                {/*        value={newSong.songInfo}*/}
+                {/*        onChange={this.handleInputChange}*/}
+                {/*        className="border rounded-md p-2 w-full mb-2"*/}
+                {/*    />*/}
+                {/*    /!* Add other song fields here *!/*/}
+                {/*    <button onClick={this.handleAddSong} className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">*/}
+                {/*        Add*/}
+                {/*    </button>*/}
+                {/*</div>*/}
 
                 {/* Search */}
                 <div className="mb-4">
