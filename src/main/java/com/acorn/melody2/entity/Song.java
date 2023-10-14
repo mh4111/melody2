@@ -34,6 +34,9 @@ public class Song {
     @Column(name = "Playlist_Count")
     private int playlistCount;
 
+    @Column(name = "Artist_Type")
+    private String artistType;
+
     @Column(name = "Artist_ID")
     private int artistId;
 
@@ -62,4 +65,16 @@ public class Song {
     @JoinColumn(name = "Genre_ID", referencedColumnName = "Genre_ID", insertable = false, updatable = false)
     private Genre genre;
 
+    @Transient
+    private Object artist; // Transient field for storing the artist dynamically
+
+    public Object getArtist() {
+        if (this.artistType.equals("solo")) {
+            return this.soloArtist;
+        } else if (this.artistType.equals("Group")) {
+            return this.groupArtist;
+        } else {
+            return null;
+        }
+    }
 }

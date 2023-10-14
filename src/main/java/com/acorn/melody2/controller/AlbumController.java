@@ -56,4 +56,5 @@ public class AlbumController {
     public void deleteAlbum(@PathVariable int id) {
         albumService.deleteAlbum(id);
     }
+
 }

@@ -1,17 +1,21 @@
 "use client"
 
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import axios from "axios";
 import LikeButton from "../../(Detail)/album/LikeButton";
+// import {UserContext} from "../contexts/UserContext";
+import {useRouter} from "next/router";
 
 const AlbumDetail = ({albumId}) => {
+    // const { userState, userDispatch } = useContext(UserContext);
+    const router = useRouter();
+
     const [songs, setSongs] = useState([]);
     const [genres, setGenres] = useState([]);
     const [albums, setAlbums] = useState([]);
     const [searchKeyword, setSearchKeyword] = useState("");
     const [searchResults, setSearchResults] = useState([]);
     const [selectedSongs, setSelectedSongs] = useState({});
-
     const handleSearch = () => {
         axios
             .get(`/api/albums/search?title=${searchKeyword}`)
@@ -43,6 +47,20 @@ const AlbumDetail = ({albumId}) => {
             );
             setSelectedSongs(newSelectedSongs);
         }
+    };
+
+    useEffect(() => {
+        const fetchSongs = async () => {
+            const response = await fetch(`api/songs?albumId=${album.albumId}`);
+            const data = await response.json();
+            setSongs(data);
+        };
+        fetchSongs();
+    }, [album.albumId]);
+
+    const handleClick = (songTitle) => {
+        const song = songs.find((song) => song.title === songTitle);
+        router.push(`/song/${song.songId}`);
     };
     useEffect(() => {
         axios.get(`/api/albums`)
@@ -85,7 +103,6 @@ const AlbumDetail = ({albumId}) => {
             });
     }, [albumId]);
 
-    // Check if albums array is empty before rendering
     if (albums.length === 0) {
         return <div>Loading...</div>;
     }
@@ -210,7 +227,9 @@ const AlbumDetail = ({albumId}) => {
                                                 </td>
                                                 <td className="num"></td>
                                                 <td className="song">
-                                                    <a href={`/songs/title/${song.title}`}>{song.title}</a>
+                                                    <a href="#" onClick={() => handleClick(song.title)}>
+                                                        {song.title}
+                                                    </a>
                                                 </td>
                                                 <td className="artist">
                                                     <span>

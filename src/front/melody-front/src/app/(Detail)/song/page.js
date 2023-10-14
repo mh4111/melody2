@@ -18,6 +18,7 @@ const SongDetail = ({ songId }) => {
     const [searchKeyword, setSearchKeyword] = useState("");
     const [searchResults, setSearchResults] = useState([]);
 
+
     const handleSearch = () => {
         axios
             .get(`/api/songs/search?title=${searchKeyword}`)
@@ -105,10 +106,16 @@ const SongDetail = ({ songId }) => {
                                     </h1>
                                 </div>
                             </div>
-                            <h2> {song.artistType === "Solo" ? song.soloArtist.singerName : song.groupArtist.groupName} 재생시간: {formatDuration(song.duration)} </h2>
+                            <div>
+                                {song.album.soloArtist ? (
+                                    <h2 className="artistName">{song.album.soloArtist.singerName}</h2>
+                                ) : (
+                                    <h2 className="artistName">{song.album.groupArtist.groupName}</h2>
+                                )}
+                            </div>
                             <div className="song_info">
                                 {song.songInfo}
-                                장르다 장르{genres.find((genre) => genre.genreId === song.genreId)?.genreName}
+                                장르{genres.find((genre) => genre.genreId === song.genreId)?.genreName}
                             </div>
                             <div className="play_with_me">
                                 <div className="play_option">재생버튼</div>

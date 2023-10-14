@@ -120,4 +120,5 @@ public class AlbumService {
         logger.warn(query.getResultList().toString());
         return query.getResultList();
     }
+
 }
