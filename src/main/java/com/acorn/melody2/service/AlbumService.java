@@ -63,7 +63,6 @@ public class AlbumService {
 
             // Set the artist name to the album
             album.setArtistName(artistName);
-
             return Optional.of(album);
         }
 

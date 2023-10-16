@@ -2,14 +2,13 @@
 
 import React, {useState, useEffect, useContext} from "react";
 import axios from "axios";
-
 import {UserContext} from "../../../contexts/UserContext";
 import LikeButton from "../../../components/detail/LikeButton";
+import Link from "next/link";
 
-function AlbumDetail(albumId) {
-    const { userState, userDispatch } = useContext(UserContext);
+function AlbumDetail({albumId}) {
+    const {userState, userDispatch} = useContext(UserContext);
     const [songs, setSongs] = useState([]);
-    const [genres, setGenres] = useState([]);
     const [albums, setAlbums] = useState([]);
     const [searchKeyword, setSearchKeyword] = useState("");
     const [searchResults, setSearchResults] = useState([]);
@@ -49,7 +48,7 @@ function AlbumDetail(albumId) {
             // Otherwise, select all songs
             const allSongIds = songs.map((song) => song.songId);
             const newSelectedSongs = allSongIds.reduce(
-                (acc, songId) => ({ ...acc, [songId]: true }),
+                (acc, songId) => ({...acc, [songId]: true}),
                 {}
             );
             setSelectedSongs(newSelectedSongs);
@@ -78,14 +77,6 @@ function AlbumDetail(albumId) {
             .catch((err) => {
                 console.error("Failed to fetch songs:", err);
             });
-        axios.get("/api/genres")
-            .then((res) => {
-                setGenres(res.data);
-                console.log("Genres:", res.data);
-            })
-            .catch((err) => {
-                console.error("Failed to fetch Genres:", err);
-            });
 
         if (albumId === undefined || albumId === null) {
             return;
@@ -93,7 +84,6 @@ function AlbumDetail(albumId) {
 
 
     }, [albumId]);
-
 
 
     // Check if albums array is empty before rendering
@@ -141,10 +131,9 @@ function AlbumDetail(albumId) {
                                     <h2 className="title_area">
                                         <span className="title"> {album.albumTitle} </span>
                                         <span className="title_artist">
-                                        {/*{album.artistType === "Solo" ? album.soloArtist.singerName : album.groupArtist.groupName}*/}
+                                            {/*{album.artistType === "Solo" ? album.soloArtist.singerName : album.groupArtist.groupName}*/}
                                             {album.artistType === "Solo" ? album.soloArtist.singerName : (album.groupArtist ? album.groupArtist.groupName : 'Unknown')}
-
-                                    </span>
+                                        </span>
                                     </h2>
                                     <div className="sub">
                                         <span className="item">{album.releaseDate}</span>
@@ -160,8 +149,8 @@ function AlbumDetail(albumId) {
                                 </div>
                                 <div className="play_with_me">
                                     <div className="play_option">재생버튼</div>
-
-                                    <LikeButton album={album} localLikes={album.likes} setLocalLikes={setLocalLikes} />
+                                    <LikeButton album={album} localLikes={album.likes} setLocalLikes={setLocalLikes}/>
+                                    {localLikes[album.albumId] ? localLikes[album.albumId] : 0}
                                     <div className="more_option">더보기 버튼</div>
                                 </div>
                             </div>
@@ -212,8 +201,8 @@ function AlbumDetail(albumId) {
                                         <tbody>
                                         {songs
                                             .filter((song) => song.albumId === album.albumId)
-                                            .map((song) => (
-                                                <tr key={song.songId}>
+                                            .map((song, index) => (
+                                                <tr key={index}>
                                                     <td className="select">
                                                         <input
                                                             type="checkbox"
@@ -224,16 +213,16 @@ function AlbumDetail(albumId) {
                                                     </td>
                                                     <td className="num"></td>
                                                     <td className="song">
-                                                        <a href={`/songs/title/${song.title}`}>{song.title}</a>
+                                                        <Link href={`/song/${song.songId}`}>{song.title}</Link>
                                                     </td>
                                                     <td className="artist">
-                                                    <span>
-                                                      {album.artistType === "Solo" ? (
-                                                          <a href={`/artists/${album.soloArtist.artistId}`}>{album.soloArtist.singerName}</a>
-                                                      ) : (
-                                                          <a href={`/artists/${album.groupArtist.artistId}`}>{album.groupArtist.groupName}</a>
-                                                      )}
-                                                    </span>
+                                                      <span>
+                                                        {album.artistType === "Solo" ? (
+                                                            <a href={`/artists/${album.soloArtist.artistId}`}>{album.soloArtist.singerName}</a>
+                                                        ) : (
+                                                            <a href={`/artists/${album.groupArtist.artistId}`}>{album.groupArtist.groupName}</a>
+                                                        )}
+                                                      </span>
                                                     </td>
                                                     <td></td>
                                                     <td className="lyrics">
@@ -241,9 +230,7 @@ function AlbumDetail(albumId) {
                                                             {song.lyrics}
                                                         </a>
                                                     </td>
-                                                    <td className="option">
-
-                                                    </td>
+                                                    <td className="option"></td>
                                                 </tr>
                                             ))}
                                         </tbody>
@@ -270,7 +257,8 @@ function AlbumDetail(albumId) {
                     </div>
                 </div>
             ))}
-        </div>);
+        </div>
+    );
 };
 
 export default AlbumDetail;

@@ -144,7 +144,7 @@ const SongDetail = ({ songId }) => {
                                     <div className="thumb_area">
                                         <Link href="/album">
                                             <img src={albums.find(album => album.albumId === song.albumId)?.coverPhoto}
-                                                 alt={song.albumTitle}
+
                                                  width={100}
                                                  height={100}/>
                                         </Link>
@@ -157,7 +157,7 @@ const SongDetail = ({ songId }) => {
                                         </div>
                                         <div className="artist">
                                             <Link href='#' className="artist">
-                                                {/*아티스트 불러오기*/} 가수
+                                            alt={song.albumTitle}{/*아티스트 불러오기*/} 가수
                                             </Link>
                                             <p>
                                                 {new Date(albums.find(album => album.albumId === song.albumId)?.releaseDate).toLocaleDateString()}

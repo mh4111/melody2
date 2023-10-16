@@ -39,6 +39,8 @@ public class SongController {
     // Read a song by ID
     @GetMapping("/{id}")
     public Optional<Song> getSongById(@PathVariable int id) {
+        logger.warn("api/song/id called");
+        logger.warn(String.valueOf("songId 값"+id));
         return songService.getSongById(id);
     }
 
