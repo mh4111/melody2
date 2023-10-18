@@ -60,5 +60,4 @@ public class Album {
     private String ArtistName = "";
 
 
-    // Other album properties and relationships
 }

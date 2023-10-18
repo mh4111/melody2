@@ -150,7 +150,7 @@ function AlbumDetail({albumId}) {
                                 <div className="play_with_me">
                                     <div className="play_option">재생버튼</div>
                                     <LikeButton album={album} localLikes={album.likes} setLocalLikes={setLocalLikes}/>
-                                    {localLikes[album.albumId] ? localLikes[album.albumId] : 0}
+                                    {localLikes[album.albumId] || album.likes}
                                     <div className="more_option">더보기 버튼</div>
                                 </div>
                             </div>
@@ -182,15 +182,7 @@ function AlbumDetail({albumId}) {
                                         <thead>
                                         <tr>
                                             <th scope="col" className="select"></th>
-                                            <th scope="col" className="song">
-                                                {/*<span>*/}
-                                                {/*    {songs*/}
-                                                {/*        .filter((song) => song.albumId === album.albumId)*/}
-                                                {/*        .map((song) => (*/}
-                                                {/*            <li key={song.songId}>{song.title}</li>*/}
-                                                {/*        ))}*/}
-                                                {/*  </span>*/}
-                                            </th>
+                                            <th scope="col" className="song"></th>
                                             <th scope="col"></th>
                                             <th scope="col"></th>
                                             <th scope="col"></th>

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 import {router} from "next/client";
+import LikeButton from "../../../components/detail/SongLikeButton";
 
 function formatDuration(durationInSeconds) {
     const minutes = Math.floor(durationInSeconds / 60);
@@ -17,6 +18,7 @@ const SongDetail = ({ songId }) => {
     const [albums, setAlbums] = useState([]);
     const [searchKeyword, setSearchKeyword] = useState("");
     const [searchResults, setSearchResults] = useState([]);
+    const [localLikes, setLocalLikes] = useState(0);
 
 
     const handleSearch = () => {
@@ -60,6 +62,7 @@ const SongDetail = ({ songId }) => {
             .catch((err) => {
                 console.error("Failed to fetch Albums:", err);
             });
+
     }, [songId]);
 
     if (songs.length === 0) {
@@ -67,11 +70,10 @@ const SongDetail = ({ songId }) => {
     }
 
     return (
-        <div className="max-w-md mx-auto p-4">
-
+        <div className="main_container  max-w-md mx-auto p-4 mt-2">
             {/* search */}
             <div className="mb-4">
-                <h3 className="text-x1 font-semibold mb-2">Search Songs</h3>
+                <h3 className="text-xl font-semibold mb-2">Search Songs</h3>
                 <input
                     type="text"
                     name="searchKeyword"
@@ -92,37 +94,42 @@ const SongDetail = ({ songId }) => {
             {searchResults.map((song, idx) => (
                 <div className="container" key={idx}>
                     <div className="summary_section">
-                        <div className="summary_area">
+                        <div className="summary_area flex">
                             <div className="summary_thumb">
-                                <img src={albums.find(album => album.albumId === song.albumId)?.coverPhoto}
-                                     alt={song.albumTitle}
-                                     width={200}
-                                     height={200}/>
+                                <img
+                                    src={albums.find(album => album.albumId === song.albumId)?.coverPhoto}
+                                    alt={song.albumTitle}
+                                    width={200}
+                                    height={200}
+                                    className="w-48 h-48"
+                                />
                             </div>
-                            <div className="summary">
+                            <div className="summary ml-4 flex-1">
                                 <div className="text_area">
-                                    <h1 className="text_area">
+                                    <h1 className="text-2xl font-bold">
                                         {song.title}
                                     </h1>
                                 </div>
-                            </div>
-                            <div>
-                                {song.album.soloArtist ? (
-                                    <h2 className="artistName">{song.album.soloArtist.singerName}</h2>
-                                ) : (
-                                    <h2 className="artistName">{song.album.groupArtist.groupName}</h2>
-                                )}
-                            </div>
-                            <div className="song_info">
-                                {song.songInfo}
-                                장르{genres.find((genre) => genre.genreId === song.genreId)?.genreName}
-                            </div>
-                            <div className="play_with_me">
-                                <div className="play_option">재생버튼</div>
-                                <div className="more_option">더보기 버튼
-                                    <p>
-                                        <strong>좋아요 수: </strong>{song.likes}
-                                    </p>
+                                <div className="artistName text-xl font-semibold">
+                                    {song.artist && (song.artist.singerName || song.artist.groupName)}
+                                </div>
+                                <div className="song_info text-gray-500">
+                                    {song.songInfo}
+                                    장르{genres.find((genre) => genre.genreId === song.genreId)?.genreName}
+                                </div>
+                                <div className="play_with_me mt-4 flex justify-between">
+                                    <div className="play_option">
+                                        <button
+                                            className="play-button bg-red-500 text-white w-32 h-12 rounded-lg text-lg"
+                                        >
+                                            ▶ 재생
+                                        </button>
+                                    </div>
+                                    <div className="like_button flex items-center">
+                                        <LikeButton song={song} localLikes={song.likes} setLocalLikes={setLocalLikes} />
+                                        {localLikes[song.songId] || song.likes}
+                                    </div>
+                                    <div className="more_option">더보기 버튼</div>
                                 </div>
                             </div>
                         </div>
@@ -143,10 +150,11 @@ const SongDetail = ({ songId }) => {
                                 <div className="album_info_area">
                                     <div className="thumb_area">
                                         <Link href="/album">
-                                            <img src={albums.find(album => album.albumId === song.albumId)?.coverPhoto}
-
-                                                 width={100}
-                                                 height={100}/>
+                                            <img
+                                                src={albums.find(album => album.albumId === song.albumId)?.coverPhoto}
+                                                width={100}
+                                                height={100}
+                                            />
                                         </Link>
                                     </div>
                                     <div className="text_area">
@@ -157,7 +165,8 @@ const SongDetail = ({ songId }) => {
                                         </div>
                                         <div className="artist">
                                             <Link href='#' className="artist">
-                                            alt={song.albumTitle}{/*아티스트 불러오기*/} 가수
+                                                alt={song.albumTitle}{/*아티스트 불러오기*/}
+                                                가수
                                             </Link>
                                             <p>
                                                 {new Date(albums.find(album => album.albumId === song.albumId)?.releaseDate).toLocaleDateString()}
@@ -180,10 +189,8 @@ const SongDetail = ({ songId }) => {
                     </div>
                 </div>
             ))}
-
-        {/* Search List */}
-
         </div>
+
     );
 };
 
@@ -191,7 +198,4 @@ export default SongDetail;
 
 {/*<p>*/}
 {/*    <strong>플레댓글 수: </strong>{song.playlistCount}*/}
-{/*</p>*/}
-{/*<p>*/}
-{/*    <strong>해시태그: </strong>{song.albumHashtags}*/}
 {/*</p>*/}

@@ -6,4 +6,5 @@ import lombok.Data;
 public class UpdateLikeRequest {
     private int likes;
     private int albumId;
+    private int songId;
 }

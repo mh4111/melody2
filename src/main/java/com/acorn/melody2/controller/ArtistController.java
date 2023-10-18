@@ -26,36 +26,35 @@
 //        this.groupArtistService = groupArtistService;
 //    }
 //
-//    @PostMapping
+//    @PostMapping("/solo")
 //    public SoloArtist createSoloArtist(@RequestBody SoloArtist soloArtist) {
 //        return soloArtistService.saveSoloArtist(soloArtist);
 //    }
 //
-//    @PostMapping
+//    @PostMapping("/group")
 //    public GroupArtist createGroupArtist(@RequestBody GroupArtist groupArtist) {
 //        return groupArtistService.saveGroupArtist(groupArtist);
 //    }
 //
-//    @GetMapping
+//    @GetMapping("/solo")
 //    public List<SoloArtist> getAllSoloArtists() {
 //        logger.warn("test message");
 //        return soloArtistService.getAllSoloArtists();
 //    }
 //
-//    @GetMapping
+//    @GetMapping("/group")
 //    public List<GroupArtist> getAllGroupArtists() {
 //        logger.warn("test message");
 //        return groupArtistService.getAllGroupArtists();
 //    }
 //
-//    @GetMapping("/{id}")
+//    @GetMapping("/solo/{id}")
 //    public Optional<SoloArtist> getSoloArtistById(@PathVariable int id) {
 //        return soloArtistService.getSoloArtistById(id);
 //    }
 //
-//    @GetMapping("/{id}")
+//    @GetMapping("/group/{id}")
 //    public Optional<GroupArtist> getGroupArtistById(@PathVariable int id) {
 //        return groupArtistService.getGroupArtistById(id);
 //    }
-//
 //}

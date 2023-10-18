@@ -1,9 +1,6 @@
 package com.acorn.melody2.service;
 
-import com.acorn.melody2.controller.SongController;
-import com.acorn.melody2.entity.Playlist;
-import com.acorn.melody2.entity.Song;
-import com.acorn.melody2.entity.SongPlaylist;
+import com.acorn.melody2.entity.*;
 import com.acorn.melody2.utils.PlaylistUtil;
 import com.acorn.melody2.repository.SongRepository;
 import com.acorn.melody2.repository.PlaylistRepository;
@@ -21,8 +18,6 @@ import org.springframework.stereotype.Service;
 
 import jakarta.persistence.EntityNotFoundException;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,7 +27,6 @@ public class SongService {
     private final SongRepository songRepository;
     private final PlaylistRepository playlistRepository;
     private final EntityManager entityManager; // Inject the EntityManager
-
     private static final Logger logger = LoggerFactory.getLogger(SongService.class);
 
     @Autowired
@@ -122,4 +116,5 @@ public class SongService {
             }
         }
     }
+
 }

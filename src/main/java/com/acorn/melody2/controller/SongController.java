@@ -1,12 +1,19 @@
 package com.acorn.melody2.controller;
 
+import com.acorn.melody2.dto.UpdateLikeRequest;
+import com.acorn.melody2.entity.GroupArtist;
+import com.acorn.melody2.entity.SoloArtist;
 import com.acorn.melody2.entity.Song;
+import com.acorn.melody2.repository.SongRepository;
+import com.acorn.melody2.service.GroupArtistService;
+import com.acorn.melody2.service.SoloArtistService;
 import com.acorn.melody2.service.SongService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,9 +25,13 @@ public class SongController {
 
     private final SongService songService;
 
+
+    private final SongRepository songRepository;
+
     @Autowired
-    public SongController(SongService songService) {
+    public SongController(SongService songService, SongRepository songRepository) {
         this.songService = songService;
+        this.songRepository = songRepository;
     }
 
     // Create a new song
@@ -52,6 +63,26 @@ public class SongController {
         return songs;
     }
 
+
+
+    // Get the number of likes for an album
+    @PostMapping("/likes")
+    public ResponseEntity<Song> updateSongLikes(@RequestBody UpdateLikeRequest updateLikeRequest) throws ChangeSetPersister.NotFoundException {
+        int songId = updateLikeRequest.getSongId();
+
+        Optional<Song> optionalSong = songService.getSongById(songId);
+
+        if (optionalSong.isPresent()) {
+            Song requestedSong = optionalSong.get();
+            requestedSong.setLikes(updateLikeRequest.getLikes());
+            requestedSong = songService.updateSong(songId, requestedSong);
+            return ResponseEntity.ok(requestedSong);
+        } else {
+            // Handle the case when the song is not found
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     // Update a song by ID
     @PutMapping("/{id}")
     public Song updateSong(@PathVariable int id, @RequestBody Song updatedSong) {
@@ -63,4 +94,6 @@ public class SongController {
     public void deleteSong(@PathVariable int id) {
         songService.deleteSong(id);
     }
+
+
 }

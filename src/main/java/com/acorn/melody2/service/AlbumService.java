@@ -15,15 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
-import com.acorn.melody2.repository.PlaylistRepository;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.TypedQuery;
-import com.acorn.melody2.utils.PlaylistUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import jakarta.persistence.EntityNotFoundException;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -120,6 +111,7 @@ public class AlbumService {
     public void deleteAlbum(int id) {
         albumRepository.deleteById(id);
     }
+
 
 
 }

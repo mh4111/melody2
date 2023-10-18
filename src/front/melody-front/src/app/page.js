@@ -20,6 +20,8 @@ const Home = () => {
             <h1> <Link href="/playlistPrintTest"> playlist print test </Link></h1>
             <h1> <Link href="/album"> album </Link></h1>
             <h1> <Link href="/song"> song </Link></h1>
+            <h1> <Link href="/artist"> artist </Link></h1>
+
 
             {userState.isAuthenticated ? (
                 <>
