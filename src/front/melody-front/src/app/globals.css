@@ -2,3 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+    outline: none;
+}
+
+body {
+    margin: 0;
+}
+
+body.dark {
+    background-color: #222;
+}
+
+.container {
+    max-width: none !important;
+    padding: 0;
+}
+
+/*a {*/
+/*    color: #000;*/
+/*    text-decoration: none;*/
+/*}*/
+
+/*a:hover {*/
+/*    color: #000;*/
+/*}*/

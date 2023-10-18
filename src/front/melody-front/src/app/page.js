@@ -4,6 +4,7 @@ import Link from "next/link";
 import ClientComponent from "../components/ClientComponent";
 import {useContext} from "react";
 import {UserContext} from "../contexts/UserContext";
+import SeasonSlider from "../components/main/season/SeasonSlider";
 
 const Home = () => {
 
@@ -11,8 +12,8 @@ const Home = () => {
 
 
     return (
-        <div>
-            <h1>Server Component</h1>
+        <div className="px-4 py-8">
+            <h1 className="text-3xl mb-4">Server Component</h1>
             <ClientComponent />
             <h1> <Link href="/login"> test </Link></h1>
             <h1> <Link href="/addPlaylistTest"> playlist creat test </Link></h1>
@@ -25,16 +26,17 @@ const Home = () => {
 
             {userState.isAuthenticated ? (
                 <>
-                    <p>Welcome, {userState.user.name}!</p>
-                    <p>Welcome, {userState.user.email}!</p>
+                    <p className="mt-8">Welcome, {userState.user.name}!</p>
+                    <p className="mt-4">Welcome, {userState.user.email}!</p>
                 </>
             ) : (
                 <>
-                   no login yet
+                    <p className="mt-8">No login yet</p>
                 </>
             )}
 
         </div>
+
     );
 };
 

@@ -1,10 +1,17 @@
 import './globals.css';
 import { Inter } from 'next/font/google';
 import Link from 'next/link';
-import Footer from '../components/global/footer';
+import Footer from '../components/global/Footer';
 import { UserContextProvider } from "../contexts/UserContext";
+// import Header from "../components/global/header/Header";
+import dynamic from "next/dynamic";
+
 
 const inter = Inter({ subsets: ['latin'] });
+
+
+const Header = dynamic(() => import('../components/global/header/Header'));
+
 
 export const metadata = {
   title: 'Create Next App',
@@ -40,19 +47,7 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
     <html lang="en">
     <UserContextProvider>
       <body className={inter.className}>
-      <header>
-        <div>
-          <ul className="flex bg-slate-500">
-            {links.map(({ href, key }) => (
-                <li className="flex-auto" key={key}>
-                  <Link href={href}>
-                    {key}
-                  </Link>
-                </li>
-            ))}
-          </ul>
-        </div>
-      </header>
+      {/*<Header></Header>*/}
       {children}
       <Footer />
       </body>

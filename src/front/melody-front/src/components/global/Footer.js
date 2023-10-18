@@ -1,5 +1,6 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+//this affect global because im importing in root layout
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import Script from 'next/script';
 import Head from "next/head";
 
