@@ -1,7 +1,16 @@
 package com.acorn.melody2.service;
 
 import com.acorn.melody2.entity.GroupArtist;
+import com.acorn.melody2.entity.SoloArtist;
 import com.acorn.melody2.repository.GroupArtistRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +21,13 @@ import java.util.Optional;
 public class GroupArtistService {
 
     private final GroupArtistRepository groupArtistRepository;
+    private final EntityManager entityManager;
+    private static final Logger logger = LoggerFactory.getLogger(SongService.class);
 
     @Autowired
-    public GroupArtistService(GroupArtistRepository groupArtistRepository) {
+    public GroupArtistService(GroupArtistRepository groupArtistRepository, EntityManager entityManager) {
         this.groupArtistRepository = groupArtistRepository;
+        this.entityManager = entityManager;
     }
 
     public List<GroupArtist> getAllGroupArtists() {
@@ -33,4 +45,5 @@ public class GroupArtistService {
     public void deleteGroupArtist(int id) {
         groupArtistRepository.deleteById(id);
     }
+
 }

@@ -43,7 +43,7 @@ public class Album {
 
     @Column(name = "Solo_Artist_ID")
     private Integer soloArtistId;
-
+    
     @Column(name = "Group_Artist_ID")
     private Integer groupArtistId;
 

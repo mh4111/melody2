@@ -39,6 +39,13 @@ public class AlbumController {
         return albums;
     }
 
+    @GetMapping("/{id}")
+    public Optional<Album> getAlbumById(@PathVariable int id) {
+        logger.warn("api/albums/id called");
+        logger.warn(String.valueOf("albumId 값" +  id));
+        return albumService.getAlbumById(id);
+    }
+
     // Get the number of likes for an album
     @PostMapping("/likes")
     public ResponseEntity<Album> updateAlbumLikes(@RequestBody UpdateLikeRequest updateLikeRequest) throws ChangeSetPersister.NotFoundException {
@@ -57,10 +64,21 @@ public class AlbumController {
         }
     }
 
-    @GetMapping("/{id}")
-    public Album getAlbumById(@PathVariable int id) {
-        return albumService.getAlbumById(id).orElse(null);
-    }
+
+
+//    @GetMapping("/{id}")
+//    public ResponseEntity<Album> getAlbumById(@PathVariable int id) {
+//        logger.warn("api/albums/id called");
+//        logger.warn(String.valueOf("albumId 값" +  id));
+//
+//        Optional<Album> album = albumService.getAlbumById(id);
+//
+//        if (album.isPresent()) {
+//            return ResponseEntity.ok(album.get());
+//        } else {
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
 
     @PostMapping
     public Album createAlbum(@RequestBody Album album) {

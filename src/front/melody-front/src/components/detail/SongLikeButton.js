@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { UserContext } from "../../contexts/UserContext";
-import axios from "axios";
 
 const LikeButton = ({ song, localLikes, setLocalLikes }) => {
     const {userState} = useContext(UserContext);

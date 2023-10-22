@@ -25,7 +25,6 @@ public class SongController {
 
     private final SongService songService;
 
-
     private final SongRepository songRepository;
 
     @Autowired
@@ -62,7 +61,6 @@ public class SongController {
         logger.warn("Songs found: {}", songs); // Log the list as a string
         return songs;
     }
-
 
 
     // Get the number of likes for an album

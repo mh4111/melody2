@@ -1,12 +1,10 @@
 "use client"
 
-import { useRouter } from 'next/navigation';
 import React, {useState, useEffect, useContext} from 'react';
 import { useParams } from 'next/navigation';
 import axios from 'axios';
 import {UserContext} from "../../../../contexts/UserContext";
 import LikeButton from "../../../../components/detail/SongLikeButton";
-import Link from "next/link";
 
 
 function SongDetail() {
@@ -43,13 +41,12 @@ function SongDetail() {
         // Call fetchSongData when params.songId changes or when the component mounts
         fetchSongData();
 
-
     }, [params.songId]);
 
-    // Static code moved here
-    if (!song) {
-        return <div>Loading...</div>;
-    }
+    // // Static code moved here
+    // if (!song) {
+    //     return <div>Loading...</div>;
+    // }
 
     return (
         <div>
@@ -58,8 +55,8 @@ function SongDetail() {
                 <div className="container">
                     <div className="summary_section flex items-center justify-between">
                         <div className="summary_area">
-                            <div className="flex items-center"> {/* 이미지와 텍스트를 가로로 배치하기 위해 flex 클래스 추가 */}
-                                <div className="summary_thumb mr-4"> {/* 이미지 왼쪽에 간격 추가 */}
+                            <div className="flex items-center">
+                                <div className="summary_thumb mr-4">
                                     <img
                                         src={album.coverPhoto}
                                         alt={song.albumTitle}

@@ -57,7 +57,8 @@ function AlbumDetail({albumId}) {
 
 
     useEffect(() => {
-        axios.get(`/api/albums`)
+        axios
+            .get(`/api/albums`)
             .then((res) => {
                 setAlbums(res.data);
 
@@ -148,7 +149,13 @@ function AlbumDetail({albumId}) {
                                     </div>
                                 </div>
                                 <div className="play_with_me">
-                                    <div className="play_option">재생버튼</div>
+                                    <div className="play_option">
+                                        <button
+                                            className="play-button bg-red-500 text-white w-32 h-12 rounded-lg text-lg"
+                                        >
+                                            ▶ 재생
+                                        </button>
+                                    </div>
                                     <LikeButton album={album} localLikes={album.likes} setLocalLikes={setLocalLikes}/>
                                     {localLikes[album.albumId] || album.likes}
                                     <div className="more_option">더보기 버튼</div>

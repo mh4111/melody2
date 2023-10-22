@@ -1,7 +1,16 @@
 package com.acorn.melody2.service;
 
 import com.acorn.melody2.entity.SoloArtist;
+import com.acorn.melody2.entity.Song;
 import com.acorn.melody2.repository.SoloArtistRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +23,7 @@ public class SoloArtistService {
     private final SoloArtistRepository soloArtistRepository;
 
     @Autowired
-    public SoloArtistService(SoloArtistRepository soloArtistRepository) {
+    public SoloArtistService(SoloArtistRepository soloArtistRepository, EntityManager entityManager) {
         this.soloArtistRepository = soloArtistRepository;
     }
 
@@ -33,4 +42,6 @@ public class SoloArtistService {
     public void deleteSoloArtist(int id) {
         soloArtistRepository.deleteById(id);
     }
+
+
 }
