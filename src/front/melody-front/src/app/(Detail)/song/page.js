@@ -3,8 +3,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
-import {router} from "next/client";
 import LikeButton from "../../../components/detail/SongLikeButton";
+import Lyrics from "../../../components/detail/MoreButton";
 
 function formatDuration(durationInSeconds) {
     const minutes = Math.floor(durationInSeconds / 60);
@@ -70,9 +70,10 @@ const SongDetail = ({ songId }) => {
     }
 
     return (
-        <div className="main_container  max-w-md mx-auto p-4 mt-2">
+        <div className="main_containerr max-w-md mx-auto p-4 mt-2 m-2">
+
             {/* search */}
-            <div className="mb-4">
+            <div className="search">
                 <h3 className="text-xl font-semibold mb-2">Search Songs</h3>
                 <input
                     type="text"
@@ -92,7 +93,7 @@ const SongDetail = ({ songId }) => {
 
             {/* search results */}
             {searchResults.map((song, idx) => (
-                <div className="container" key={idx}>
+                <div className="container mx-4 p-4" key={idx}>
                     <div className="summary_section">
                         <div className="summary_area flex">
                             <div className="summary_thumb">
@@ -119,7 +120,7 @@ const SongDetail = ({ songId }) => {
                                 </div>
                                 <div className="play_with_me mt-4 flex justify-between">
                                     <div className="play_option">
-                                        <button className="play-button bg-red-500 text-white w-32 h-12 rounded-lg text-lg">
+                                        <button className="play-button bg-red-500 text-white w-20 h-10 rounded-lg">
                                             ▶ 재생
                                         </button>
                                     </div>
@@ -134,15 +135,16 @@ const SongDetail = ({ songId }) => {
                             </div>
                         </div>
                         <div className="section_lyrics mb-4">
-                            <h3>
-                                <span className="section_title">
-                                    <h1><strong>가사</strong></h1>
-                                </span>
-                            </h3>
-                            <div className="lyrics mb-4">
-                                <p>{song.lyrics}</p>
-                            </div>
-                            <a href="#" className="btn_more">더보기</a>
+                            {/*<h3>*/}
+                            {/*    <span className="section_title">*/}
+                            {/*        <h1><strong>가사</strong></h1>*/}
+                            {/*    </span>*/}
+                            {/*</h3>*/}
+                            {/*<div className="lyrics mb-4">*/}
+                            {/*    <p>{song.lyrics}</p>*/}
+                            {/*</div>*/}
+                            {/*<a href="#" className="btn_more">더보기</a>*/}
+                            <Lyrics song={song} />
                         </div>
                         <div className="section_album">
                             <h3 className="mb-4">
@@ -155,13 +157,13 @@ const SongDetail = ({ songId }) => {
                                     <div className="thumb_area">
                                         <Link href={`/album/${albums.albumId}`}>
                                         <img
-                                                src={albums.find(album => album.albumId === song.albumId)?.coverPhoto}
-                                                width={100}
-                                                height={100}
+                                            src={albums.find(album => album.albumId === song.albumId)?.coverPhoto}
+                                            width={100}
+                                            height={100}
                                             />
                                         </Link>
                                     </div>
-                                    <div className="text_area ml-4"> {/* ml-4는 왼쪽 마진을 추가합니다. */}
+                                    <div className="text_area ml-4">
                                         <div className="title">
                                             <Link href="/album">
                                                 {albums.find(album => album.albumId === song.albumId)?.albumTitle}

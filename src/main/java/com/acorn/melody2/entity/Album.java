@@ -59,5 +59,4 @@ public class Album {
     @Transient
     private String ArtistName = "";
 
-
 }

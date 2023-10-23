@@ -61,7 +61,18 @@ public class SongController {
         logger.warn("Songs found: {}", songs); // Log the list as a string
         return songs;
     }
-
+//
+//    @GetMapping("/{id}")
+//    public ResponseEntity<Song> getSongByIdWithArtist(@PathVariable int id) {
+//        Optional<Song> songOptional = songService.getSongById(id);
+//        if (songOptional.isPresent()) {
+//            Song song = songOptional.get();
+//            Object artist = song.getArtist();
+//            return ResponseEntity.ok(song);
+//        } else {
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
 
     // Get the number of likes for an album
     @PostMapping("/likes")

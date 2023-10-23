@@ -10,6 +10,8 @@ function AlbumDetail({albumId}) {
     const {userState, userDispatch} = useContext(UserContext);
     const [songs, setSongs] = useState([]);
     const [albums, setAlbums] = useState([]);
+    const [artists, setArtists] = useState([]);
+
     const [searchKeyword, setSearchKeyword] = useState("");
     const [searchResults, setSearchResults] = useState([]);
     const [selectedSongs, setSelectedSongs] = useState({});
@@ -132,8 +134,9 @@ function AlbumDetail({albumId}) {
                                     <h2 className="title_area">
                                         <span className="title"> {album.albumTitle} </span>
                                         <span className="title_artist">
-                                            {/*{album.artistType === "Solo" ? album.soloArtist.singerName : album.groupArtist.groupName}*/}
-                                            {album.artistType === "Solo" ? album.soloArtist.singerName : (album.groupArtist ? album.groupArtist.groupName : 'Unknown')}
+                                           {songs.artist && (songs.artist.singerName || songs.artist.groupName)}
+                                            {/*{songs.artist &&*/}
+                                            {/*    <h3 className="artistName">{songs.artist.singerName || songs.artist.groupName}</h3>}*/}
                                         </span>
                                     </h2>
                                     <div className="sub">
@@ -151,7 +154,7 @@ function AlbumDetail({albumId}) {
                                 <div className="play_with_me">
                                     <div className="play_option">
                                         <button
-                                            className="play-button bg-red-500 text-white w-32 h-12 rounded-lg text-lg"
+                                            className="play-button bg-red-500 text-white w-20 h-10 rounded-lg"
                                         >
                                             ▶ 재생
                                         </button>
@@ -215,19 +218,11 @@ function AlbumDetail({albumId}) {
                                                         <Link href={`/song/${song.songId}`}>{song.title}</Link>
                                                     </td>
                                                     <td className="artist">
-                                                      <span>
-                                                        {album.artistType === "Solo" ? (
-                                                            <a href={`/artists/${album.soloArtist.artistId}`}>{album.soloArtist.singerName}</a>
-                                                        ) : (
-                                                            <a href={`/artists/${album.groupArtist.artistId}`}>{album.groupArtist.groupName}</a>
-                                                        )}
-                                                      </span>
+                                                        {song.artist && (song.artist.singerName || song.artist.groupName)}
                                                     </td>
                                                     <td></td>
                                                     <td className="lyrics">
-                                                        <a href="#" role="button" className="btn_lyrics">
-                                                            {song.lyrics}
-                                                        </a>
+                                                        <p>{song.lyrics}</p>
                                                     </td>
                                                     <td className="option"></td>
                                                 </tr>

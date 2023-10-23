@@ -2,6 +2,7 @@ package com.acorn.melody2.controller;
 
 import com.acorn.melody2.dto.UpdateLikeRequest;
 import com.acorn.melody2.entity.Album;
+import com.acorn.melody2.repository.AlbumRepository;
 import com.acorn.melody2.service.AlbumService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,12 +19,14 @@ import java.util.Optional;
 public class AlbumController {
 
     private final AlbumService albumService;
-
     private static final Logger logger = LoggerFactory.getLogger(AlbumController.class);
+    private final AlbumRepository albumRepository;
 
     @Autowired
-    public AlbumController(AlbumService albumService) {
+    public AlbumController(AlbumService albumService, AlbumRepository albumRepository) {
         this.albumService = albumService;
+        this.albumRepository = albumRepository;
+
     }
 
 
@@ -41,8 +44,8 @@ public class AlbumController {
 
     @GetMapping("/{id}")
     public Optional<Album> getAlbumById(@PathVariable int id) {
-        logger.warn("api/albums/id called");
-        logger.warn(String.valueOf("albumId 값" +  id));
+        logger.warn("api/album/id called");
+        logger.warn(String.valueOf("albumId 값"+id));
         return albumService.getAlbumById(id);
     }
 
