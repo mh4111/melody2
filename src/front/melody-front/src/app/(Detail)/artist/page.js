@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import {GoKebabHorizontal} from 'react-icons/go';
 
 function SongList() {
     const [songs, setSongs] = useState([]);
@@ -36,9 +37,14 @@ function SongList() {
                                 <div className="artist_summary_section">
                                     <div className="summary_wrap">
                                         <div className="">
-                                            <img className="w-full h-full rounded-full" src={song.artist ? song.artist.singerPhoto || song.artist.groupPhoto : "N/A"}
-                                                width={100}
-                                                height={100}/>
+                                            <img src={song.artist ? song.artist.singerPhoto || song.artist.groupPhoto : "N/A"}
+                                                 alt="Artist Photo"
+                                                 style={{
+                                                     borderRadius: "50%",
+                                                     width: "200px",
+                                                     height: "200px",
+                                                     objectFit: "cover",
+                                                 }} />
                                         </div>
                                         <div className="summary_text">
                                             <h2 className="artist_name">
@@ -53,7 +59,9 @@ function SongList() {
                                         <h3>
                                             <div className="end_section_more">
                                                 <div className="section_title">노래</div>
-                                                <div>더보기</div>
+                                                <div>
+                                                    <a href="#"><GoKebabHorizontal /></a>
+                                                </div>
                                             </div>
                                         </h3>
                                         <div className="track_section">
@@ -72,7 +80,11 @@ function SongList() {
                                                         <tr className>
                                                             <td className="thumb">
                                                                 <div className="ineer">
-                                                                    <img src={song.artist ? song.artist.singerPhoto || song.artist.groupPhoto : "N/A"} />
+                                                                    <img src={song.artist ? song.artist.singerPhoto || song.artist.groupPhoto : "N/A"}
+                                                                    style={{
+                                                                        width:"50px",
+                                                                        height:"50px",
+                                                                    }}/>
                                                                 </div>
                                                             </td>
                                                             <td className="song">
@@ -100,7 +112,7 @@ function SongList() {
                                                                 <div className="inner">
                                                                     <div className="downdrop_wrap">
                                                                         <a href="#" role="button" className="btn_option">
-                                                                            <span></span>
+                                                                            <GoKebabHorizontal />
                                                                         </a>
                                                                     </div>
                                                                 </div>
@@ -124,8 +136,10 @@ function SongList() {
                                                     <div className="thumb_area">
                                                         <a href="#" className="link">
                                                            <img src={albums.find((album) => album.albumId === song.albumId)?.coverPhoto}
-                                                                width={50}
-                                                                height={50} />
+                                                                style={{
+                                                                    width:"50px",
+                                                                    height:"50px",
+                                                                }} />
                                                         </a>
                                                     </div>
                                                     <div className="info">
