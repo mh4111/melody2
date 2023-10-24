@@ -192,6 +192,7 @@ const Header = () => {
                     </Gnb>
                 </Nav>
             </HeaderInner>
+            <div className="mb-8"> </div>
         </HeaderContainer>
     );
 };

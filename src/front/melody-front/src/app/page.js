@@ -12,9 +12,30 @@ const Home = () => {
 
 
     return (
+
         <div className="px-4 py-8">
             <h1 className="text-3xl mb-4">Server Component</h1>
             <ClientComponent />
+            <div className="mt-8"></div>
+            <SeasonSlider/>
+            <h1 className="text-2xl mt-8">
+                <Link href="/login">Test</Link>
+            </h1>
+            <h1 className="text-2xl mt-4">
+                <Link href="/addPlaylistTest">Playlist Create Test</Link>
+            </h1>
+            <h1 className="text-2xl mt-4">
+                <Link href="/addSongTest">Add Song to Playlist Test</Link>
+            </h1>
+            <h1 className="text-2xl mt-4">
+                <Link href="/playlistPrintTest">Playlist Print Test</Link>
+            </h1>
+            <h1 className="text-2xl mt-4">
+                <Link href="/detailTest">Detail Print Test</Link>
+            </h1>
+            <h1 className="text-2xl mt-4">
+                <Link href="/musicPlayer">music player test </Link>
+            </h1>
             <h1> <Link href="/login"> test </Link></h1>
             <h1> <Link href="/addPlaylistTest"> playlist creat test </Link></h1>
             <h1> <Link href="/addSongTest"> add song to playlist test </Link></h1>

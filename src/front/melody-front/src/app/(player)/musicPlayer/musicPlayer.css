@@ -1,0 +1,225 @@
+@charset "UTF-8"; /* MusicPlayer.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Dongle:wght@300;400;700&family=Poppins:wght@300&display=swap');
+
+
+.reactPlayerWrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+/*.reactPlayer {*/
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    border-radius: 10px;*/
+/*}*/
+
+.playerContainer {
+    background: white;
+    position: relative;
+    margin: auto;
+    width: 800px;
+    height: 500px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 15px rgb(128, 128, 128);
+    transition: all 0.5s ease-in-out;
+    z-index: 0;
+}
+
+.playerContainer:hover {
+    transform: scale(1.05);
+}
+
+.album {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.albumImg {
+    background: url("https://search.pstatic.net/sunny/?src=https%3A%2F%2Fimage.bugsm.co.kr%2Falbum%2Fimages%2F500%2F40885%2F4088574.jpg&type=sc960_832") no-repeat;
+    background-size: 300px;
+    border-radius: 10px;
+    box-shadow: 0px 10px 10px 0px rgb(128, 128, 128);
+    height: 300px;
+    width: 300px;
+    position: relative;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -20%);
+    overflow: hidden;
+}
+
+.blankedHeart,
+.coloredHeart {
+    position: absolute;
+    right: 0;
+    margin: 25px;
+    transition: all 1s ease;
+    cursor: pointer;
+}
+
+.coloredHeart.clicked {
+    color: #49654D;
+    transform: scale(1.2);
+    transition: all 0.2s ease;
+}
+
+.info {
+    height: 200px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    background: whitesmoke;
+    border-radius: 10px;
+}
+
+.songName {
+    font-family: "Poppins", sans-serif;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: 70px;
+    position: relative;
+    z-index: 1;
+    letter-spacing: 4px;
+    color: #364F3C;
+}
+
+.artistName {
+    font-family: "Poppins", sans-serif;
+    font-size: 0.7em;
+    text-align: center;
+    margin-top: 5px;
+    letter-spacing: 2px;
+    color: #557c5f;
+}
+
+.controls {
+    display: flex;
+    position: relative;
+    align-items: center;
+    font-size: 0.8em;
+    justify-content: center;
+    color: #89a9a9;
+    margin-top: 60px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.controls .play,
+.controls .pause {
+    margin: 15px 25px;
+    color: #6e946c;
+    cursor: pointer;
+}
+
+.controls .option {
+    left: 30px;
+    position: absolute;
+    font-size: 0.8em;
+}
+
+.controls .volume {
+    right: 250px;
+    position: absolute;
+    font-size: 0.8em;
+}
+
+.controls .volumeCtrl {
+    width: 20px;
+    height: 90px;
+    background: hsl(117, 16%, 80%);
+    border-radius: 10px;
+    position: absolute;
+    bottom: 67px;
+    right: 247px;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+}
+
+.controls .volumeCtrl.hidden {
+    display: none;
+}
+
+.controls .volumeBg {
+    width: 5px;
+    height: 90%;
+    margin-top: 5px;
+    border-radius: 3px;
+    background-color: whitesmoke;
+    position: absolute;
+    overflow: hidden;
+}
+
+.controls .volumeRange {
+    appearance: none;
+    width: 83px;
+    position: absolute;
+    right: 0;
+    top: -11px;
+    background: transparent;
+    transform-origin: center right;
+    transform: rotate(270deg);
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.controls .volumeRange:focus {
+    outline: none;
+}
+
+.controls .volumeRange::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 100%;
+    border-radius: 2px;
+}
+
+.controls .volumeRange::-webkit-slider-thumb {
+    appearance: none;
+    width: 6px;
+    height: 15px;
+    border-radius: 50%;
+    background: white;
+    box-shadow: -100vw 0 0 100vw rgb(128, 128, 128);
+}
+
+.controls .mute {
+    right: 250px;
+    font-size: 0.8em;
+    position: absolute;
+}
+
+.controls .repeat {
+    margin-right: 30px;
+    font-size: 0.8em;
+}
+
+.controls .shuffle {
+    margin-left: 30px;
+    font-size: 0.8em;
+}
+
+.play,
+.pause,
+.next,
+.previous,
+.option,
+.volume,
+.shuffle {
+    transition: all 0.5s ease;
+}
+
+.play:hover,
+.pause:hover,
+.next:hover,
+.previous:hover,
+.option:hover,
+.volume:hover,
+.shuffle:hover {
+    color: #557c5f;
+}

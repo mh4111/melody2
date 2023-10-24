@@ -8,7 +8,7 @@ function TestApi() {
     const fetchData = async () => {
         try {
             const dataToSend = {
-                "youtube_url" : "https://www.youtube.com/watch?v=JBe0yHNEURo"
+                "youtube_url" : "https://www.youtube.com/watch?v=UmI94FXx__M"
             };
 
             const res = await fetch('https://y5c1520fb4.execute-api.ap-northeast-2.amazonaws.com/melody-aws/api/getMusic', {

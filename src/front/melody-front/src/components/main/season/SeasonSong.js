@@ -10,17 +10,17 @@ import {
 
 const SeasonSong = ({ songData }) => {
     return (
-            <>
-                <SeasonSongImageContainer>
-                    <SeasonSongImageElement src={songData.image} alt={songData.title} />
-                </SeasonSongImageContainer>
-                <SeasonSongText>
-                    <p className="season-song-text-p">
-                        <span className="season-song-text-span">{songData.title}</span>
-                        {songData.artist}
-                    </p>
-                </SeasonSongText>
-            </>
+        <>
+            <SeasonSongImageContainer>
+                <SeasonSongImageElement src={songData.image} alt={songData.title} />
+            </SeasonSongImageContainer>
+            <SeasonSongText>
+                <p className="season-song-text-p">
+                    <span className="season-song-text-span">{songData.title}</span>
+                    {songData.artist}
+                </p>
+            </SeasonSongText>
+        </>
     );
 };
 
