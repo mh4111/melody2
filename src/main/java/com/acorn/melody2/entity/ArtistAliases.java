@@ -24,5 +24,4 @@ public class ArtistAliases {
     @JoinColumn(name = "groupArtistId")
     private GroupArtist groupArtist;
 
-    // Constructors, getters, and setters as needed
 }
