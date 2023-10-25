@@ -5,7 +5,7 @@ import { faHeart, faBackward, faPause, faPlay, faForward, faShuffle, faVolumeHig
 import { faHeart as farHeart } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 
-import MyCustomPlayerVersionTwo from "./MyCustomPlayerVersionTwo";
+import MyCustomPlayer from "./MyCustomPlayer";
 
 library.add(
     faHeart,
@@ -22,7 +22,7 @@ library.add(
 );
 
 // const url = "";
-const url1 = "https://store-mp3-temp-melody2.s3.amazonaws.com//test.mp3?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIA5QBN5WIEL4QOVNEP%2F20231023%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20231023T062340Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEP7%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDmFwLW5vcnRoZWFzdC0yIkcwRQIhANKi%2FBVyIDmBd%2FO97JZJ1oBRj9%2FNXDezOfwInQn0dCLAAiA%2F%2Br5r%2Fff0FveX6Haoh7TDIhfqE72pSagCCs8cbZ0hgSrzAggoEAAaDDkyNzgwOTI1Mzg5NiIMuYbfP5iGBtYD2gL3KtACds%2BOiW71GNbJqh1rhjDqyi%2BjNsYSANdisWE04FEnUK%2BaaNBBLpcxQNBSM%2F0G%2FoI5vMcogTNlnZP%2FxDnyuiV1m0BAKX2saoAELlZdDaQvdlm3giQq3kb4WuyLf9jAy8EYOqofGuNcMUmlc7dP1cVJk3vPoq8RNsZFoPnmQFdmHRVf71ImmIm1QeJvH4PlkoUhgr4wDl7qLvjqn5E3OW3bF4O9LSlixpxEjCcNlvZ8DynzvuTECDaWEf6U6MSTTDPrVLnMOVwnaLSWOga7jDe%2FaD5fMSY%2FzH4gcwH9RQt3QbdWBI7%2BnQLYU3b302sa6jRSN%2BZgp4hmZ7%2BlDBw70Qt0A60tlUINXlyPVmjT2IoRmiiVoiHIzlSGozVtGZEwqFlKMdr%2BYo1dhuRHEGTmHX%2Fk7xRLF9Ov%2FN%2FqCrne3xp5r4PrKrB93dNlWUV1brOe7yEGMOCi2KkGOp4BhbVR1NJDT1HT4znHdKaxy2ES%2BOQ1Eju7YtCmGUDHX57q86MA9kc2df1uxGi6bNn26S%2BUfWVMJZNkvRGPPXAmmEZzTnTKRzJEe4UPMW3MG260mmttVzoiL2zYj45NGYGYJoHFi9pLhhMlK5lFl%2F8exT1VLoZEFyjHgOHJQkllQgyCq0VEKFnGWu%2FxrvbeOZ5%2FJ4RbJIx6z%2FhW24ySmPE%3D&X-Amz-Signature=79529a7a1ba929bc2f74bbf3f64d452f4cfb2ec41a406f8e1dad07c3436bb731"
+const url1 = "https://store-mp3-temp-melody2.s3.amazonaws.com//test.mp3?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIA5QBN5WIEJAGLCH3P%2F20231025%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20231025T000859Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Security-Token=IQoJb3JpZ2luX2VjECgaDmFwLW5vcnRoZWFzdC0yIkgwRgIhAKFF1RtH7kY6vuqcdUR7%2BrbcJHuhv%2FQx%2F%2FF4n8CuLy8LAiEAw289l%2BIL78%2BgMtBWFqcO%2FggjLbDatu22GK24YCy9Q7Mq8wIIURAAGgw5Mjc4MDkyNTM4OTYiDHf6Fo9sEeGzgDh2ZCrQAtfHh7Z9rtXTvbccloCYE6b58vgVQGT7aYK9aLgLg%2B1XvX3LCpFHuTFP5Nd25R6TmDDBSl76g6noPRT%2B%2FFn0O8ymBeMmWQ7YNm15Nf2oR%2BgEeTL3WajnBLx7pKcWkoP3UNUW8NAXDageG5kTo%2Bidf%2B7k00x6xaI50oRm1Y71Ht6VFLo5wAvUY6YJq2dkUeMZxvhcXcAZ0r%2FrmYy8JXnJXhaKTB%2B4cU000C8rbXM8ccO0v6PlJSAw7ahPAebDO3pHams1nhDgLMt0tPYGZmamlcMXnpzbGBmDzuzu%2FQEgZ3L8q8hQGhBtwioZDfQB4jT5a0K0r0iz5J0WnMc5aTVKICYnZOq%2FXBRIU%2Bg0FDRH3Fh4vW3MjWzy01KatrNlYpEcsfeyAOC4gSVxy%2FK%2BSn%2FC0S3R9jdZUTUW5kSYKNZLOaQv0aO1XydQiSSvIf5J%2BGbC8DCPueGpBjqdAf%2FECnB1KOyUP0NoOj%2FZ1oq6GEOsNmceArEz1%2F95EhF1BIw56y2nQg63AdhHoEUFrhSG0QM7gDSbXSy%2BsEJO%2B1HWcZ7O%2BRErQ9GExAcSgxCs7Ai3KWNH94z4q%2BW7Fv2mCePRPNh8Lq6LGF9YsOIje03DKq7%2BK8OujiE6OPzFDNBczEjQtpaLS0YCBlofdATgFNOxYBp31C%2FFYvTKOl8%3D&X-Amz-Signature=9b306820c2fd27b8a49311ef7c5a98492526ddebb72f37275571de561b5996a1";
 const url2 = "https://store-mp3-temp-melody2.s3.amazonaws.com//test.mp3?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIA5QBN5WIEIKDS6DEW%2F20231017%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20231017T052717Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEG0aDmFwLW5vcnRoZWFzdC0yIkcwRQIhAItOi%2B39av7QkgnLlSMqSP80MIut%2FYymxyoQ3bXAe4EDAiACqAUHj59gURrSix3w4N%2B%2BLQlngQSwgmuQ8J2d6YvkHSr8AgiH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDkyNzgwOTI1Mzg5NiIMeVM9gnc0V9ZrZ4uuKtACg4793BXp8P0eFbVVmj8teUbwpfguwdyG31LaflRwRbePXMi7yMOFQSsgqQFVxAfjTNp5XYfMVqCccV4qi8XxONWO8PQwuDWcAFvtjwNHlphqK83899jB3oY7R846ihGuDks77SpBsetAbTyIcjbO8NqmXMwNbDnSgFSw%2FZ4TVDPTzRwyg7a5Oqz6v%2Bczkd7rYJhpjWiwobg7JO%2B3K0KJLmlxLjRPFiqRY%2BAA9%2FZMFZ%2FxzzDnd1531ozlFoUemmvbzF0rM%2FjZzNUJWceueq%2FafKW2F9%2FGS0OvN4cqgQEaUqso2xL4YUEsqp%2FHDHMHI0Jrtx3uSDKkp8o3JHwr1QvSE4X6QIK%2B%2FrFE69ZCu2IQdWqPGdYHYXYoBZ44N8T%2BvnKFAmo6BthPLi%2BZKj3IUxVI50UtfrU0ZqlpAqZZj85tkSJbYRCifuH7ne2L55YgE8bEMIq2uKkGOp4Bl%2ByuAjbhhtSuXLIfSMKipaTFhTZEGXTvKbR0IegcBDxnPji%2BHkk2S94vKxxRCeR8iyBCkUbOsaSWSoCBp5akwpBW3FFaB4bo7is2M0rt5XKl91CnjXur2NEhdjgKOeHT3c8vUW0yZIclgW2%2FL89ME0xMEdM5JnRPsVBfSzV5sZB3rExPa2%2FVt9piDdnMzzeFy7kJhDmVb6lE9V4aylQ%3D&X-Amz-Signature=8fdde399fedbe40799faeb8f9ca90d29af72706b4e3f7854325c691227c5cf70";
 const playlist = [
     {
@@ -62,7 +62,7 @@ function MusicPlayer({ song = { title: 'Song Title' }, album = { singerName: 'Ar
         <>
             {songs ? (
                 <div className="mt-16 musicPlayerContainer">
-                    <MyCustomPlayerVersionTwo
+                    <MyCustomPlayer
                         song={songs[currentSongIndex]}
                         playlistEl={playlist[currentSongIndex]}
                         playlist={playlist}

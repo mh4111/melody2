@@ -1,66 +1,93 @@
 package com.acorn.melody2.controller;
 
+
 import com.acorn.melody2.entity.GroupArtist;
 import com.acorn.melody2.entity.SoloArtist;
-import com.acorn.melody2.service.SoloArtistService;
-import com.acorn.melody2.service.GroupArtistService;
+import com.acorn.melody2.service.ArtistService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+
 
 @RestController
-@RequestMapping("/api/artist")
+@RequestMapping("/api/artists")
 public class ArtistController {
-    private static final Logger logger = LoggerFactory.getLogger(ArtistController.class);
-
-    private final SoloArtistService soloArtistService;
-    private final GroupArtistService groupArtistService;
 
     @Autowired
-    public ArtistController(SoloArtistService soloArtistService, GroupArtistService groupArtistService) {
-        this.soloArtistService = soloArtistService;
-        this.groupArtistService = groupArtistService;
+    private ArtistService artistService;
+
+    private static final Logger logger = LoggerFactory.getLogger(ArtistController.class);
+
+    // Create Solo Artist
+    @PostMapping("/solo")
+    public SoloArtist createSoloArtist(@RequestBody SoloArtist soloArtist) {
+        return artistService.createSoloArtist(soloArtist);
     }
 
-    @PostMapping("/{artistType}")
-    public Object createArtist(@PathVariable String artistType, @RequestBody Object artist) {
-        if ("solo".equals(artistType)) {
-            return soloArtistService.saveSoloArtist((SoloArtist) artist);
-        } else if ("group".equals(artistType)) {
-            return groupArtistService.saveGroupArtist((GroupArtist) artist);
-        } else {
-            // Handle invalid artistType or return an appropriate response
-            return ResponseEntity.badRequest().body("Invalid artist type.");
-        }
+    // Create Group Artist
+    @PostMapping("/group")
+    public GroupArtist createGroupArtist(@RequestBody GroupArtist groupArtist) {
+        return artistService.createGroupArtist(groupArtist);
     }
 
-    @GetMapping("/{artistType}")
-    public List<?> getAllArtists(@PathVariable String artistType) {
-        if ("solo".equals(artistType)) {
-            return soloArtistService.getAllSoloArtists();
-        } else if ("group".equals(artistType)) {
-            return groupArtistService.getAllGroupArtists();
-        } else {
-            // Handle invalid artistType or return an appropriate response
-            return Collections.singletonList(ResponseEntity.badRequest().body("Invalid artist type."));
-        }
+    // Read Solo Artist by ID
+    @GetMapping("/solo/{id}")
+    public ResponseEntity<SoloArtist> getSoloArtistById(@PathVariable int id) {
+        Optional<SoloArtist> soloArtist = artistService.getSoloArtistById(id);
+        return soloArtist.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/{artistType}/{id}")
-    public Optional<?> getArtistById(@PathVariable String artistType, @PathVariable int id) {
-        if ("solo".equals(artistType)) {
-            return soloArtistService.getSoloArtistById(id);
-        } else if ("group".equals(artistType)) {
-            return groupArtistService.getGroupArtistById(id);
-        } else {
-            // Handle invalid artistType or return an appropriate response
-            return Optional.of(ResponseEntity.badRequest().body("Invalid artist type."));
-        }
+    // Read Group Artist by ID
+    @GetMapping("/group/{id}")
+    public ResponseEntity<GroupArtist> getGroupArtistById(@PathVariable int id) {
+        Optional<GroupArtist> groupArtist = artistService.getGroupArtistById(id);
+        return groupArtist.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    // Update Solo Artist
+    @PutMapping("/solo/{id}")
+    public SoloArtist updateSoloArtist(@PathVariable int id, @RequestBody SoloArtist updatedSoloArtist) {
+        return artistService.updateSoloArtist(id, updatedSoloArtist);
+    }
+
+    // Update Group Artist
+    @PutMapping("/group/{id}")
+    public GroupArtist updateGroupArtist(@PathVariable int id, @RequestBody GroupArtist updatedGroupArtist) {
+        return artistService.updateGroupArtist(id, updatedGroupArtist);
+    }
+
+    @GetMapping(path = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Object> searchArtists(@RequestParam String name) {
+        logger.warn(name);
+
+        // Get group IDs associated with the artist
+        List<SoloArtist> soloArtistsResult = artistService.searchSoloArtistsByName(name);
+        List<GroupArtist> groupArtistsResult = artistService.searchGroupArtistsByName(name);
+
+        List<Object> results = new ArrayList<>();
+        results.addAll(soloArtistsResult);
+        results.addAll(groupArtistsResult);
+
+        return results;
+    }
+
+
+
+
+    // Delete Solo Artist
+    @DeleteMapping("/solo/{id}")
+    public void deleteSoloArtist(@PathVariable int id) {
+        artistService.deleteSoloArtist(id);
+    }
+
+    // Delete Group Artist
+    @DeleteMapping("/group/{id}")
+    public void deleteGroupArtist(@PathVariable int id) {
+        artistService.deleteGroupArtist(id);
     }
 }

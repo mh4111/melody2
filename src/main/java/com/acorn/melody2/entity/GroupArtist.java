@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Entity
 @Table(name = "GroupArtists")
 @Data
@@ -25,4 +27,8 @@ public class GroupArtist {
 
     @Column(name = "Group_Hashtags", length = 200)
     private String groupHashtags;
+
+//    @OneToMany(mappedBy = "groupArtist", cascade = CascadeType.ALL)
+//    private List<ArtistAliases> artistAliases;
+
 }

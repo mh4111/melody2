@@ -212,19 +212,6 @@ export default function Component({
                 </div>
 
 
-
-                {/*<ReactPlayerController*/}
-                {/*    isPlaying={isPlaying}*/}
-                {/*    handlePlayPause={handlePlayPause}*/}
-                {/*    handleNextClick={handleNextClick}*/}
-                {/*    handlePreviousClick={handlePreviousClick}*/}
-                {/*    handleToggleRepeat={handleToggleRepeat}*/}
-                {/*    handleToggleShuffle={handleToggleShuffle}*/}
-                {/*    volume={volume}*/}
-                {/*    setVolume={setVolume}*/}
-                {/*    isMuted={isMuted}*/}
-                {/*    handleToggleMute={handleToggleMute}*/}
-                {/*/>*/}
             </div>
         </div>
     )
