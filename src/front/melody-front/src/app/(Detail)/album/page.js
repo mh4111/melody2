@@ -197,7 +197,6 @@ function AlbumDetail({albumId}) {
                                             <th scope="col"></th>
                                             <th scope="col"></th>
                                             <th scope="col"></th>
-                                            <th scope="col"></th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -213,7 +212,6 @@ function AlbumDetail({albumId}) {
                                                             onChange={() => handleSelectChange(song.songId)}
                                                         />
                                                     </td>
-                                                    <td className="num"></td>
                                                     <td className="song">
                                                         <Link href={`/song/${song.songId}`}>{song.title}</Link>
                                                     </td>

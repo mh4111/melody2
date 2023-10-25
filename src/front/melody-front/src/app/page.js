@@ -36,13 +36,15 @@ const Home = () => {
             <h1 className="text-2xl mt-4">
                 <Link href="/musicPlayer">music player test </Link>
             </h1>
-            <h1> <Link href="/login"> test </Link></h1>
-            <h1> <Link href="/addPlaylistTest"> playlist creat test </Link></h1>
-            <h1> <Link href="/addSongTest"> add song to playlist test </Link></h1>
-            <h1> <Link href="/playlistPrintTest"> playlist print test </Link></h1>
-            <h1> <Link href="/album"> album </Link></h1>
-            <h1> <Link href="/song"> song </Link></h1>
-            <h1> <Link href="/artist"> artist </Link></h1>
+            <h1 className="text-2xl mt-4">
+                <Link href="/album"> album </Link>
+            </h1>
+            <h1 className="text-2xl mt-4">
+                <Link href="/song"> song </Link>
+            </h1>
+            <h1 className="text-2xl mt-4">
+                <Link href="/artist"> artist </Link>
+            </h1>
 
 
             {userState.isAuthenticated ? (
