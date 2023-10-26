@@ -1,10 +1,12 @@
 "use client"
+
 import React, {useState, useEffect, useContext} from 'react';
 import {useParams} from 'next/navigation';
 import axios from 'axios';
 import {UserContext} from "../../../../contexts/UserContext";
 import LikeButton from "../../../../components/detail/LikeButton";
 import Link from "next/link";
+import styles from "../album.css";
 
 function AlbumDetail({albumId}) {
     const {userState, userDispatch} = useContext(UserContext);
@@ -66,14 +68,13 @@ function AlbumDetail({albumId}) {
 
     return (
         <div>
-            <h3 className="text-xl font-semibold mb-2">Album List</h3>
-            <ul className="album-list">
+            <ul className="container">
                 {albums.map((albums) => (
                     <li key={albums.albumId} className="album-item">
-                        <div className="summary_section flex items-center justify-between">
+                        <div className="summary_section">
                             <div className="summary_area">
-                                <div className="flex items-center">
-                                    <div className="summary_thumb mr-4">
+                                <div className="summary">
+                                    <div className="thumb">
                                         <img
                                             src={albums.coverPhoto}
                                             width={250}
@@ -81,15 +82,18 @@ function AlbumDetail({albumId}) {
                                         />
                                     </div>
                                     <div className="summary">
-                                        <div className="text_area">
-                                            <h1 className="title_area">{albums.albumTitle}</h1>
-                                        </div>
-                                        <div>
+                                        <h2 className="text_area">
+                                            <span className="title">{albums.albumTitle}</span>
+                                            <span className="title_artist">
                                             {albums.artist && (
                                                 <h3 className="artistName">
                                                     {albums.artist.singerName || albums.artist.groupName}
                                                 </h3>
                                             )}
+                                            </span>
+                                        </h2>
+                                        <div className="sub">
+                                            <span className="item">{albums.releaseDate}</span>
                                         </div>
                                         <div className="album_info">
                                             <div className="item">{albums.albumInfo}</div>
@@ -98,7 +102,7 @@ function AlbumDetail({albumId}) {
                                         <div className="play_with_me">
                                             <div className="play_option">
                                                 <button
-                                                    className="play-button bg-red-500 text-white w-20 h-10 rounded-lg">
+                                                    className="play-button">
                                                     ▶ 재생
                                                 </button>
                                             </div>

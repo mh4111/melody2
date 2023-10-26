@@ -45,6 +45,10 @@ const Home = () => {
             <h1 className="text-2xl mt-4">
                 <Link href="/artist"> artist </Link>
             </h1>
+            <h1 className="text-2xl mt-4">
+                <Link href="/artistSearchTest"> Searchartist </Link>
+            </h1>
+
 
 
             {userState.isAuthenticated ? (

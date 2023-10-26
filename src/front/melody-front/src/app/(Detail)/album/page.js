@@ -1,10 +1,12 @@
 "use client"
 
+import styles from "./album.css";
 import React, {useState, useEffect, useContext} from "react";
 import axios from "axios";
 import {UserContext} from "../../../contexts/UserContext";
 import LikeButton from "../../../components/detail/LikeButton";
 import Link from "next/link";
+import {GoKebabHorizontal} from 'react-icons/go';
 
 function AlbumDetail({albumId}) {
     const {userState, userDispatch} = useContext(UserContext);
@@ -121,22 +123,24 @@ function AlbumDetail({albumId}) {
                 <div className="container" key={album.albumId}>
                     <div className="summary_section">
                         <div className="summary_area">
-                            <div className="summary_thumb">
-                                <img
-                                    src={albums.find(item => item.albumId === album.albumId)?.coverPhoto}
-                                    alt={album.albumTitle}
-                                    width={200}
-                                    height={200}
-                                />
-                            </div>
                             <div className="summary">
+                                <div className="thumb">
+                                    <img
+                                        src={albums.find(item => item.albumId === album.albumId)?.coverPhoto}
+                                        alt={album.albumTitle}
+                                        width={240}
+                                        height={240}
+                                    />
+                                </div>
                                 <div className="text_area">
                                     <h2 className="title_area">
                                         <span className="title"> {album.albumTitle} </span>
                                         <span className="title_artist">
-                                           {songs.artist && (songs.artist.singerName || songs.artist.groupName)}
-                                            {/*{songs.artist &&*/}
-                                            {/*    <h3 className="artistName">{songs.artist.singerName || songs.artist.groupName}</h3>}*/}
+                                           {/*{songs.artist && (songs.artist.singerName || songs.artist.groupName)}*/}
+                                           {/* {songs.artist && (songs.artist.singerName || songs.artist.groupName)}*/}
+                                           {/* {albums.artist &&*/}
+                                           {/*     <h3 className="artistName">{albums.artist.singerName || albums.artist.groupName}</h3>}*/}
+                                            {album.soloArtist ? album.soloArtist.singerName : album.groupArtist.groupName}
                                         </span>
                                     </h2>
                                     <div className="sub">
@@ -154,17 +158,27 @@ function AlbumDetail({albumId}) {
                                 <div className="play_with_me">
                                     <div className="play_option">
                                         <button
-                                            className="play-button bg-red-500 text-white w-20 h-10 rounded-lg"
+                                            className="play-button"
                                         >
                                             ▶ 재생
                                         </button>
                                     </div>
-                                    <LikeButton album={album} localLikes={album.likes} setLocalLikes={setLocalLikes}/>
-                                    {localLikes[album.albumId] || album.likes}
-                                    <div className="more_option">더보기 버튼</div>
+                                    <div className="more_option">
+                                        <div className="btn_like">
+                                            <LikeButton album={album} localLikes={album.likes} setLocalLikes={setLocalLikes}/>
+                                            {localLikes[album.albumId] || album.likes}
+                                        </div>
+                                        <div className="btn_more">
+                                            <a href="#" role="button"
+                                               className="btn_more">
+                                                <GoKebabHorizontal/>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div className="track_section">
+                                <div className="section_title">노래</div>
                                 <div className="select_all">
                                     <div className="check_area">
                                         <input
@@ -180,20 +194,19 @@ function AlbumDetail({albumId}) {
                                     </div>
                                     <div className="text_area">
                                         <div className="inner">
-                                            <span>{songs.filter((song) => song.albumId === album.albumId).length}곡</span>
+                                            <span className="text">{songs.filter((song) => song.albumId === album.albumId).length}곡</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div>
-                                <div className="tracklsit">
+                                <div className="tracklist">
                                     <table border="1">
                                         <caption></caption>
                                         <thead>
                                         <tr>
                                             <th scope="col" className="select"></th>
                                             <th scope="col" className="song"></th>
-                                            <th scope="col"></th>
                                             <th scope="col"></th>
                                             <th scope="col"></th>
                                             <th scope="col"></th>
@@ -212,6 +225,15 @@ function AlbumDetail({albumId}) {
                                                             onChange={() => handleSelectChange(song.songId)}
                                                         />
                                                     </td>
+                                                    <td className="inner_thumb">
+                                                        <div className="inner">
+                                                            <img
+                                                                src={albums.find(item => item.albumId === album.albumId)?.coverPhoto}
+                                                                width={100}
+                                                                height={100}
+                                                            />
+                                                        </div>
+                                                    </td>
                                                     <td className="song">
                                                         <Link href={`/song/${song.songId}`}>{song.title}</Link>
                                                     </td>
@@ -219,10 +241,12 @@ function AlbumDetail({albumId}) {
                                                         {song.artist && (song.artist.singerName || song.artist.groupName)}
                                                     </td>
                                                     <td></td>
-                                                    <td className="lyrics">
-                                                        <p>{song.lyrics}</p>
+                                                    {/*<td className="lyrics">*/}
+                                                    {/*    <p>{song.lyrics}</p>*/}
+                                                    {/*</td>*/}
+                                                    <td className="option">
+                                                        <GoKebabHorizontal />
                                                     </td>
-                                                    <td className="option"></td>
                                                 </tr>
                                             ))}
                                         </tbody>
@@ -230,21 +254,18 @@ function AlbumDetail({albumId}) {
                                 </div>
                             </div>
 
-                            <p>
-                                <strong>평점: </strong>{album.rating}
-                            </p>
-                            <p>
-                                <strong>댓글 수: </strong>{album.replyCount}
-                            </p>
-                            <p>
-                                <strong>좋아요 수: </strong>{localLikes[album.albumId] ? localLikes[album.albumId] : 0}
-                            </p>
-                            <p>
-                                <strong>뮤직 비디오: </strong><a href={album.musicVideoLink}>링크</a>
-                            </p>
-                            <p>
-                                <strong>해시태그: </strong>{album.albumHashtags}
-                            </p>
+                            {/*<p>*/}
+                            {/*    <strong>평점: </strong>{album.rating}*/}
+                            {/*</p>*/}
+                            {/*<p>*/}
+                            {/*    <strong>댓글 수: </strong>{album.replyCount}*/}
+                            {/*</p>*/}
+                            {/*<p>*/}
+                            {/*    <strong>뮤직 비디오: </strong><a href={album.musicVideoLink}>링크</a>*/}
+                            {/*</p>*/}
+                            {/*<p>*/}
+                            {/*    <strong>해시태그: </strong>{album.albumHashtags}*/}
+                            {/*</p>*/}
                         </div>
                     </div>
                 </div>

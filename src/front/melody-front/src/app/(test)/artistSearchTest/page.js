@@ -54,6 +54,7 @@ function ArtistSearch() {
                             </>
                         )}
                         {/* Display other artist details */}
+                        {artist.singerInfo}
                     </div>
                 ))}
             </div>

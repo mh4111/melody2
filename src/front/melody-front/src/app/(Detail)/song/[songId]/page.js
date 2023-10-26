@@ -1,11 +1,14 @@
 "use client"
 
+import styles from "./song.css";
 import React, {useState, useEffect, useContext} from 'react';
-import { useParams } from 'next/navigation';
+import {useParams} from 'next/navigation';
 import axios from 'axios';
 import {UserContext} from "../../../../contexts/UserContext";
 import LikeButton from "../../../../components/detail/SongLikeButton";
-
+import {GoKebabHorizontal} from "react-icons/go";
+import {AiFillYahoo} from "react-icons/ai";
+import Youtube from "../../../../components/detail/Youtube";
 
 function SongDetail() {
     const {userState, userDispatch} = useContext(UserContext);
@@ -49,66 +52,72 @@ function SongDetail() {
     // }
 
     return (
-        <div>
-            <h3 className="text-xl font-semibold mb-2">Song List</h3>
-            <li key={song.songId} className="border-b py-2">
-                <div className="container">
-                    <div className="summary_section flex items-center justify-between">
-                        <div className="summary_area">
-                            <div className="flex items-center">
-                                <div className="summary_thumb mr-4">
-                                    <img
-                                        src={album.coverPhoto}
-                                        alt={song.albumTitle}
-                                        width={250}
-                                        height={200}
-                                    />
+        <div className="main_container">
+            <div className="container" key={song.songId}>
+                <div className="summary_section">
+                    <div className="summary_area">
+                        <div className="summary_thumb mr-4">
+                            <img
+                                src={album.coverPhoto}
+                                alt={song.albumTitle}
+                                width={250}
+                                height={200}
+                            />
+                        </div>
+                        <div className="summary">
+                            <div className="text_area_one">
+                                <h1 className="title">
+                                    <strong>{song.title}</strong>
+                                </h1>
+                            </div>
+                            <div className="artistName">
+                                {song.artist && (song.artist.singerName || song.artist.groupName)}
+                            </div>
+                            <div className="song_info">
+                                <div className="item">
+                                    {song.songInfo}
                                 </div>
-                                <div className="summary">
-                                    <div className="text_area">
-                                        <h1 className="title_area">
-                                            {song.title}
-                                        </h1>
-                                    </div>
-                                    <div>
-                                        {song.artist &&
-                                            <h3 className="artistName">{song.artist.singerName || song.artist.groupName}</h3>}
-                                    </div>
-                                    <div className="song_info">
-                                        <div className="item">{song.songInfo}</div>
-                                        <p>더보기</p>
-                                    </div>
-                                    <div className="play_with_me">
-                                        <div className="play_option">
-                                            <button
-                                                className="play-button bg-red-500 text-white w-32 h-12 rounded-lg text-lg">
-                                                ▶ 재생
-                                            </button>
-                                        </div>
-                                        <LikeButton song={song} localLikes={song.likes} setLocalLikes={setLocalLikes}/>
-                                        {/*{localLikes[song.songId] ? localLikes[song.songId] : 0}*/}
+                            </div>
+                            <div className="play_with_me">
+                                <div className="play_option">
+                                    <button className="play-button">
+                                        ▶ 재생
+                                    </button>
+                                </div>
+                                <div className="more_option">
+                                    <div className="btn_like">
+                                        <LikeButton song={song} localLikes={song.likes}
+                                                    setLocalLikes={setLocalLikes}/>
                                         {localLikes[song.songId] || song.likes}
-                                        <div className="more_option">더보기 버튼</div>
+                                    </div>
+                                    <div className="btn_more">
+                                        <a href="#" role="button"
+                                           className="btn_more">
+                                            <GoKebabHorizontal/>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="end_section section_lyrics">
+                    <div className="end_section">
                         <h3>
-                            <span className="section_title"><h2><strong>가사</strong></h2></span>
+                                <span className="section_title">
+                                  <h1><strong>가사</strong></h1>
+                                </span>
                         </h3>
                         <div className="lyrics">
-                            <p>{song.lyrics}</p>
+                            {song.lyrics}
                         </div>
-                        <a href="#" className="btn_more">더보기</a>
                     </div>
                     <div className="end_section">
                         <h3>
-                            <span className="section_title">수록 앨범</span>
+                            <span className="section_title">
+                               수록 앨범
+                            </span>
                         </h3>
-                        <div className="album_info_area flex justify-between">
-                            <div className="thumb_area w-150px">
+                        <div className="album_info_area">
+                            <div className="thumb_area">
                                 <img
                                     src={album.coverPhoto}
                                     alt={song.albumTitle}
@@ -116,13 +125,13 @@ function SongDetail() {
                                     height={150}
                                 />
                             </div>
-                            <div className="text_area flex-1">
-                                <div className="ineer">
-                                    <div className="inner_ablum text-3xl font-bold">
+                            <div className="text_area">
+                                <div className="inner">
+                                    <div className="title">
                                         {album.albumTitle}
                                     </div>
                                 </div>
-                                <div className="inner_artist">
+                                <div className="artist">
                                     {song.artist && (
                                         <p className="artistName text-2xl">
                                             {song.artist.singerName || song.artist.groupName}
@@ -136,29 +145,16 @@ function SongDetail() {
 
                         </div>
                     </div>
-                    <div className="end_section">
-                        <h3 className="section_title_wrap">
-                            <span className="section_title">이 곡의 뮤비</span>
-                        </h3>
-                        <div className="list-wrap_video">
-                            <div>
-                                <a href="#">뮤비링크</a>
-                                <div className="info">
-                                    <div className="text_area">
-                                        <h1 className="title_area">
-                                            {song.title}
-                                        </h1>
-                                    </div>
-                                    <div>
-                                        {song.artist &&
-                                            <p className="artistName">{song.artist.singerName || song.artist.groupName}</p>}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {/*<div className="end_section">*/}
+                    {/*    <h3 className="section_title_wrap">*/}
+                    {/*        <span className="section_title"><strong>이 곡의 뮤비</strong></span>*/}
+                    {/*    </h3>*/}
+                    {/*    <div className="list_wrap_video">*/}
+                    {/*        */}
+                    {/*    </div>*/}
+                    {/*</div>*/}
                 </div>
-            </li>
+            </div>
         </div>
     );
 }

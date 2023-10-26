@@ -57,6 +57,5 @@ public class Album {
 
     //table과 연동 되지 않는 변수
     @Transient
-    private String ArtistName = "";
-
+    private String artistName = "";
 }
