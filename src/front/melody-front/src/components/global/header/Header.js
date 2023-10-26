@@ -1,9 +1,9 @@
 "use client"
 import React from 'react';
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const HeaderContainer = styled.header`
-  position: fixed;
+  //position: fixed;
   width: 100%;
   background-color: #eeeded;
   display: flex;
@@ -183,12 +183,14 @@ const Header = () => {
                         </form>
                     </SubLnb>
                     <Gnb>
-                        <a href="#season">Season</a>
-                        <a href="#best">Best</a>
-                        <a href="#new">New</a>
-                        <a href="#genre">Genre</a>
-                        <a href="#artist">Artist</a>
-                        <a href="#musicvideo">Music Video</a>
+                        <Link href="#season">Season</Link>
+                        <Link href="#best">Best</Link>
+                        <Link href="#new">New</Link>
+                        <Link href="#genre">Genre</Link>
+                        <Link href="#artist">Artist</Link>
+                        <Link href="#musicvideo">Music Video</Link>
+                        <Link href="/help/faq">F & Q</Link>
+
                     </Gnb>
                 </Nav>
             </HeaderInner>

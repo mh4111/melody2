@@ -62,6 +62,29 @@ const Home = () => {
                 </>
             )}
 
+            <h1 className="text-2xl mt-4">
+                <Link href="/playlist">musang test </Link>
+            </h1>
+
+            <h1 className="text-2xl mt-4">
+                <Link href="/help/faq">help test </Link>
+            </h1>
+
+            <h1 className="text-2xl mt-4">
+                <Link href="/admin/administrator">admin test </Link>
+            </h1>
+
+            {/*{userState.isAuthenticated ? (*/}
+            {/*    <>*/}
+            {/*        <p className="mt-8">Welcome, {userState.user.name}!</p>*/}
+            {/*        <p className="mt-4">Welcome, {userState.user.email}!</p>*/}
+            {/*    </>*/}
+            {/*) : (*/}
+            {/*    <>*/}
+            {/*        <p className="mt-8">No login yet</p>*/}
+            {/*    </>*/}
+            {/*)}*/}
+
         </div>
 
     );
