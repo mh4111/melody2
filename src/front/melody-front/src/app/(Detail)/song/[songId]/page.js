@@ -7,8 +7,7 @@ import axios from 'axios';
 import {UserContext} from "../../../../contexts/UserContext";
 import LikeButton from "../../../../components/detail/SongLikeButton";
 import {GoKebabHorizontal} from "react-icons/go";
-import {AiFillYahoo} from "react-icons/ai";
-import Youtube from "../../../../components/detail/Youtube";
+import Link from "next/link";
 
 function SongDetail() {
     const {userState, userDispatch} = useContext(UserContext);
@@ -102,12 +101,12 @@ function SongDetail() {
                     </div>
                     <div className="end_section">
                         <h3>
-                                <span className="section_title">
-                                  <h1><strong>가사</strong></h1>
-                                </span>
+                            <span className="section_title">
+                              <h1><strong>가사</strong></h1>
+                            </span>
                         </h3>
                         <div className="lyrics">
-                            {song.lyrics}
+                            <p>{song.lyrics}</p>
                         </div>
                     </div>
                     <div className="end_section">
@@ -118,12 +117,14 @@ function SongDetail() {
                         </h3>
                         <div className="album_info_area">
                             <div className="thumb_area">
+                                <Link href={`/album/${album.albumId}`}>
                                 <img
                                     src={album.coverPhoto}
                                     alt={song.albumTitle}
                                     width={150}
                                     height={150}
                                 />
+                                </Link>
                             </div>
                             <div className="text_area">
                                 <div className="inner">
@@ -138,7 +139,7 @@ function SongDetail() {
                                         </p>
                                     )}
                                 </div>
-                                <div className="inner_date text-2xl">
+                                <div className="date">
                                     {album.releaseDate}
                                 </div>
                             </div>

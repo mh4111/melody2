@@ -1,21 +1,23 @@
 "use client"
 
+import styles from "./album.css";
 import React, {useState, useEffect, useContext} from 'react';
-import {useParams} from 'next/navigation';
+import {useParams, usePathname, useSearchParams} from 'next/navigation';
 import axios from 'axios';
 import {UserContext} from "../../../../contexts/UserContext";
 import LikeButton from "../../../../components/detail/LikeButton";
 import Link from "next/link";
-import styles from "../album.css";
 
-function AlbumDetail({albumId}) {
-    const {userState, userDispatch} = useContext(UserContext);
+
+function AlbumDetail() {
+    const { albumId } = useParams();
+
+    const { userState, userDispatch } = useContext(UserContext);
     const [songs, setSongs] = useState([]);
     const [albums, setAlbums] = useState([]);
     const [selectedSongs, setSelectedSongs] = useState({});
 
     const [localLikes, setLocalLikes] = useState(0);
-    const params = useParams();
 
     const handleSelectChange = (songId) => {
         setSelectedSongs((prevSelectedSongs) => ({
@@ -32,7 +34,7 @@ function AlbumDetail({albumId}) {
             // Otherwise, select all songs
             const allSongIds = songs.map((song) => song.songId);
             const newSelectedSongs = allSongIds.reduce(
-                (acc, songId) => ({...acc, [songId]: true}),
+                (acc, songId) => ({ ...acc, [songId]: true }),
                 {}
             );
             setSelectedSongs(newSelectedSongs);
@@ -40,34 +42,34 @@ function AlbumDetail({albumId}) {
     };
 
     useEffect(() => {
-
-        axios
-            .get(`/api/albums`)
-            .then((response) => {
-                setAlbums(response.data);
-                console.log("Albums:", response.data);
-            })
-            .catch((err) => {
-                console.error("Failed to fetch albums:", err);
-            });
-
-        axios.get(`/api/songs`)
-            .then((res) => {
-                setSongs(res.data);
-                console.log("Songs:", res.data);
-            })
-            .catch((err) => {
-                console.error("Failed to fetch songs:", err);
-            });
-
-        if (albumId === undefined || albumId === null) {
+        if (!albumId) {
             return;
         }
 
+        axios
+            .get(`/api/albums/${albumId}`)
+            .then((response) => {
+                setAlbums([response.data]);
+                console.log('Albums:', response.data);
+            })
+            .catch((err) => {
+                console.error('Failed to fetch albums:', err);
+            });
+
+        axios
+            .get(`/api/songs`)
+            .then((res) => {
+                setSongs(res.data);
+                console.log('Songs:', res.data);
+            })
+            .catch((err) => {
+                console.error('Failed to fetch songs:', err);
+            });
     }, [albumId]);
 
     return (
         <div>
+            {albums.length > 0 && (
             <ul className="container">
                 {albums.map((albums) => (
                     <li key={albums.albumId} className="album-item">
@@ -190,6 +192,7 @@ function AlbumDetail({albumId}) {
                     </li>
                 ))}
             </ul>
+                )}
         </div>
     );
 }

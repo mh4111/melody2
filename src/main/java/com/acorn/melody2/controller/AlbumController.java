@@ -70,17 +70,23 @@ public class AlbumController {
 
 
 //    @GetMapping("/{id}")
-//    public ResponseEntity<Album> getAlbumById(@PathVariable int id) {
-//        logger.warn("api/albums/id called");
-//        logger.warn(String.valueOf("albumId 값" +  id));
+//    public ResponseEntity<Album> getAlbumById(@PathVariable Optional<Integer> id) {
+//        // Check if the albumId is null or zero.
+//        if (id == null || id.isEmpty()) {
+//            return ResponseEntity.badRequest().build();
+//        }
 //
-//        Optional<Album> album = albumService.getAlbumById(id);
+//        // Get the albumId.
+//        int albumId = id.get();
 //
-//        if (album.isPresent()) {
-//            return ResponseEntity.ok(album.get());
-//        } else {
+//        // Check if the albumId exists.
+//        Optional<Album> album = albumService.getAlbumById(albumId);
+//        if (!album.isPresent()) {
 //            return ResponseEntity.notFound().build();
 //        }
+//
+//        // Return the album.
+//        return ResponseEntity.ok(album.get());
 //    }
 
     @PostMapping
@@ -97,4 +103,5 @@ public class AlbumController {
     public void deleteAlbum(@PathVariable int id) {
         albumService.deleteAlbum(id);
     }
+
 }

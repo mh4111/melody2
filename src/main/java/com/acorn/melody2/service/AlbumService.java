@@ -1,8 +1,9 @@
 package com.acorn.melody2.service;
 
 import com.acorn.melody2.entity.Album;
-import com.acorn.melody2.entity.Song;
+import com.acorn.melody2.entity.UserAccount;
 import com.acorn.melody2.repository.AlbumRepository;
+import com.acorn.melody2.repository.UserAccountRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -24,11 +25,13 @@ public class AlbumService {
     private final AlbumRepository albumRepository;
     private final EntityManager entityManager;
     private static final Logger logger = LoggerFactory.getLogger(AlbumService.class);
+    private final UserAccountRepository userAccountRepository;
 
     @Autowired
-    public AlbumService(AlbumRepository albumRepository, EntityManager entityManager) {
+    public AlbumService(AlbumRepository albumRepository, EntityManager entityManager, UserAccountRepository userAccountRepository) {
         this.albumRepository = albumRepository;
         this.entityManager = entityManager;
+        this.userAccountRepository = userAccountRepository;
     }
 
     public List<Album> getAllAlbums() {
@@ -111,6 +114,5 @@ public class AlbumService {
     public void deleteAlbum(int id) {
         albumRepository.deleteById(id);
     }
-
 
 }

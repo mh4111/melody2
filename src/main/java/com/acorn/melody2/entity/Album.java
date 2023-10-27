@@ -3,6 +3,9 @@ package com.acorn.melody2.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.HashSet;
+import java.util.Set;
+
 
 @Entity
 @Table(name = "Album")

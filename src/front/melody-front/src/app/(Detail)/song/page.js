@@ -154,7 +154,7 @@ const SongDetail = ({songId}) => {
                             </h3>
                             <div className="album_info_area ">
                                 <div className="thumb_area">
-                                    <Link href={`/album/${albums.albumId}`}>
+                                    <Link href={`/album/${albums.find(album => album.albumId === song.albumId)?.albumId}`}>
                                         <img
                                             src={albums.find(album => album.albumId === song.albumId)?.coverPhoto}
                                             width={100}

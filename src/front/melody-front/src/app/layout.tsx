@@ -1,20 +1,12 @@
 import './globals.css';
 import { Inter } from 'next/font/google';
 import Link from 'next/link';
-
-import Footer from '../components/global/Footer';
-import { UserContextProvider } from "../contexts/UserContext";
-// import Header from "../components/global/header/Header";
+import Footer from '../components/global/footer';
+import {UserContextProvider} from "../contexts/UserContext";
 import dynamic from "next/dynamic";
 
-
 const inter = Inter({ subsets: ['latin'] });
-
-
 const Header = dynamic(() => import('../components/global/header/Header'));
-
-
-
 
 export const metadata = {
   title: 'Create Next App',
@@ -39,14 +31,6 @@ const links: LinkItem[] = [
     href: '/login',
     key: 'login',
   },
-  {
-    href: '/help/faq',
-    key: '고객센터',
-  },
-  {
-    href: '/admin/administrator',
-    key: '관리자페이지',
-  }
 ];
 
 type RootLayoutProps = {
@@ -55,16 +39,26 @@ type RootLayoutProps = {
 
 export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
   return (
-
-    <html lang="en">
-    <UserContextProvider>
-      <body className={inter.className}>
-          <Header  />
-          {/*<div className="mt-8"/>*/}
-           {children}
-          <Footer />
-      </body>
-    </UserContextProvider>
-    </html>
+      <html lang="en">
+      <UserContextProvider>
+        <body className={inter.className}>
+        <header>
+          <div>
+            <ul className="flex bg-slate-500">
+              {links.map(({ href, key }) => (
+                  <li className="flex-auto" key={key}>
+                    <Link href={href}>
+                      {key}
+                    </Link>
+                  </li>
+              ))}
+            </ul>
+          </div>
+        </header>
+        {children}
+        <Footer />
+        </body>
+      </UserContextProvider>
+      </html>
   );
 }

@@ -5,7 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
-
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Data
@@ -41,6 +42,8 @@ public class UserAccount {
 
     @Column(name = "User_Hashtags")
     private String userHashtags;
+
+
 
 //    @Column(name = "Prefer_Genre_ID")
 //    private Long preferGenreId;

@@ -22,6 +22,8 @@ public class UserAccountBasicController {
         this.userAccountService = userAccountService;
     }
 
+
+
     @GetMapping
     public ResponseEntity<List<UserAccount>> getAllUserAccounts() {
         List<UserAccount> userAccounts = userAccountService.getAllUserAccounts();

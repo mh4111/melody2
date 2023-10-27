@@ -72,7 +72,6 @@ public class PlaylistController {
     }
 
     // Read a playlist by ID
-    // Read a playlist by ID
     @GetMapping("/{id}")
     public ResponseEntity<Playlist> getPlaylistById(@PathVariable Long id) {
         Playlist playlist = playlistService.getSongsByPlaylistId(id);
