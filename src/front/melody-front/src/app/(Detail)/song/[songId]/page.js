@@ -146,14 +146,6 @@ function SongDetail() {
 
                         </div>
                     </div>
-                    {/*<div className="end_section">*/}
-                    {/*    <h3 className="section_title_wrap">*/}
-                    {/*        <span className="section_title"><strong>이 곡의 뮤비</strong></span>*/}
-                    {/*    </h3>*/}
-                    {/*    <div className="list_wrap_video">*/}
-                    {/*        */}
-                    {/*    </div>*/}
-                    {/*</div>*/}
                 </div>
             </div>
         </div>

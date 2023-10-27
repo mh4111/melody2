@@ -241,9 +241,6 @@ function AlbumDetail({albumId}) {
                                                         {song.artist && (song.artist.singerName || song.artist.groupName)}
                                                     </td>
                                                     <td></td>
-                                                    {/*<td className="lyrics">*/}
-                                                    {/*    <p>{song.lyrics}</p>*/}
-                                                    {/*</td>*/}
                                                     <td className="option">
                                                         <GoKebabHorizontal />
                                                     </td>
@@ -253,19 +250,6 @@ function AlbumDetail({albumId}) {
                                     </table>
                                 </div>
                             </div>
-
-                            {/*<p>*/}
-                            {/*    <strong>평점: </strong>{album.rating}*/}
-                            {/*</p>*/}
-                            {/*<p>*/}
-                            {/*    <strong>댓글 수: </strong>{album.replyCount}*/}
-                            {/*</p>*/}
-                            {/*<p>*/}
-                            {/*    <strong>뮤직 비디오: </strong><a href={album.musicVideoLink}>링크</a>*/}
-                            {/*</p>*/}
-                            {/*<p>*/}
-                            {/*    <strong>해시태그: </strong>{album.albumHashtags}*/}
-                            {/*</p>*/}
                         </div>
                     </div>
                 </div>
