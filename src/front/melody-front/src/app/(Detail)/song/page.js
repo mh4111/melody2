@@ -93,6 +93,7 @@ const SongDetail = ({songId}) => {
                 </button>
             </div>
 
+
             {/* search results */}
             {searchResults.map((song, idx) => (
                 <div className="container" key={idx}>

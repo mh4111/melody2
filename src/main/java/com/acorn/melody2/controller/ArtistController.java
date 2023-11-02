@@ -78,7 +78,6 @@ public class ArtistController {
 
 
 
-
     // Delete Solo Artist
     @DeleteMapping("/solo/{id}")
     public void deleteSoloArtist(@PathVariable int id) {

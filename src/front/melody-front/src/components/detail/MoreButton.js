@@ -38,7 +38,7 @@ const Lyrics = ({ song }) => {
                 {isMore ? (
                     <p>{song.lyrics}</p>
                 ) : (
-                    <p>{song.lyrics.slice(0, 100)}</p>
+                    <p>{song.lyrics.slice(0, 200)}</p>
                 )}
             </div>
             <a href="#" className="btn_more" onClick={handleMoreClick}>더보기</a>

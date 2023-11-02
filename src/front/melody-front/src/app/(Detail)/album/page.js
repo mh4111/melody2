@@ -134,7 +134,9 @@ function AlbumDetail({albumId}) {
                                 </div>
                                 <div className="text_area">
                                     <h2 className="title_area">
-                                        <span className="title"> {album.albumTitle} </span>
+                                        <span className="title">
+                                            {album.albumTitle}
+                                            </span>
                                         <span className="title_artist">
                                            {/*{songs.artist && (songs.artist.singerName || songs.artist.groupName)}*/}
                                            {/* {songs.artist && (songs.artist.singerName || songs.artist.groupName)}*/}
@@ -216,7 +218,7 @@ function AlbumDetail({albumId}) {
                                         {songs
                                             .filter((song) => song.albumId === album.albumId)
                                             .map((song, index) => (
-                                                <tr key={index}>
+                                                <tr key={index} className="">
                                                     <td className="select">
                                                         <input
                                                             type="checkbox"
